@@ -267,6 +267,7 @@
                   <th>Produit</th>
                   <th>Catégorie</th>
                   <th>Prix vente</th>
+                  <th>Fournisseur</th>
                   <th>Stock actuel</th>
                   <th>Seuil alerte</th>
                   <th>Statut</th>
@@ -280,84 +281,103 @@
 
       <!-- ===== FOURNISSEURS ===== -->
       <section id="section-suppliers" class="admin-section">
-        <div style="display:flex;justify-content:flex-end;margin-bottom:16px;">
-          <button class="btn btn-primary" onclick="toggleSupplierForm()">➕ Nouvelle commande fournisseur</button>
+
+        <!-- Onglets -->
+        <div class="section-tabs">
+          <button class="section-tab active" data-tab="profiles" onclick="switchSupplierTab('profiles')">
+            👥 Fiches fournisseurs
+          </button>
+          <button class="section-tab" data-tab="orders" onclick="switchSupplierTab('orders')">
+            📋 Commandes dropshipping
+          </button>
         </div>
 
-        <div class="supplier-form" id="supplier-form">
-          <div class="card-title" style="margin-bottom:16px;">📋 Nouvelle commande fournisseur</div>
-          <form onsubmit="submitSupplierOrder(event)">
-            <div class="form-row">
-              <div class="form-group">
-                <label>Fournisseur *</label>
-                <select name="supplier" required>
-                  <option value="">— Choisir —</option>
-                  <option>CycloPro Distribution</option>
-                  <option>VéloImport SAS</option>
-                  <option>KidsBike Europe</option>
-                  <option>SportCycle France</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label>Produit *</label>
-                <select name="product" required>
-                  <option value="">— Choisir —</option>
-                  <option>Mini Bolide</option>
-                  <option>Primo 12"</option>
-                  <option>Spark 14"</option>
-                  <option>Junior 16"</option>
-                  <option>Trail 18"</option>
-                  <option>Explorer 20"</option>
-                  <option>Avanti 24"</option>
-                  <option>Street Kid BMX</option>
-                  <option>Dirt Pro BMX</option>
-                  <option>E-Spark 20"</option>
-                  <option>Rainbow Girl</option>
-                  <option>Zoom Draisienne</option>
-                </select>
-              </div>
-            </div>
-            <div class="form-row">
-              <div class="form-group">
-                <label>Quantité *</label>
-                <input type="number" name="qty" min="1" value="10" required>
-              </div>
-              <div class="form-group">
-                <label>Prix unitaire fournisseur (€) *</label>
-                <input type="number" name="unitCost" min="0" step="0.01" placeholder="ex: 67.50" required>
-              </div>
-            </div>
-            <div style="display:flex;gap:10px;margin-top:8px;">
-              <button type="submit" class="btn btn-primary">✅ Valider la commande</button>
-              <button type="button" class="btn btn-outline" onclick="toggleSupplierForm()">Annuler</button>
-            </div>
-          </form>
+        <!-- Tab: Fiches fournisseurs -->
+        <div class="sup-tab-content active" id="sup-tab-profiles">
+          <div style="display:flex;justify-content:flex-end;margin-bottom:16px;">
+            <button class="btn btn-primary" onclick="openSupplierProfileModal()">➕ Nouveau fournisseur</button>
+          </div>
+          <div class="supplier-profiles-grid" id="supplier-profiles-grid"></div>
         </div>
 
-        <div class="card">
-          <div class="card-header">
-            <div>
-              <div class="card-title">Historique commandes fournisseurs</div>
-              <div class="card-subtitle">Toutes les commandes passées auprès de vos fournisseurs</div>
+        <!-- Tab: Commandes dropshipping -->
+        <div class="sup-tab-content" id="sup-tab-orders">
+          <div style="display:flex;justify-content:flex-end;margin-bottom:16px;">
+            <button class="btn btn-primary" onclick="toggleSupplierForm()">➕ Nouvelle commande fournisseur</button>
+          </div>
+
+          <div class="supplier-form" id="supplier-form">
+            <div class="card-title" style="margin-bottom:16px;">📋 Nouvelle commande fournisseur</div>
+            <form onsubmit="submitSupplierOrder(event)">
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Fournisseur *</label>
+                  <select name="supplier" id="sup-order-supplier-select" required>
+                    <option value="">— Choisir —</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Produit *</label>
+                  <select name="product" required>
+                    <option value="">— Choisir —</option>
+                    <option>Mini Bolide</option>
+                    <option>Primo 12"</option>
+                    <option>Spark 14"</option>
+                    <option>Junior 16"</option>
+                    <option>Trail 18"</option>
+                    <option>Explorer 20"</option>
+                    <option>Avanti 24"</option>
+                    <option>Street Kid BMX</option>
+                    <option>Dirt Pro BMX</option>
+                    <option>E-Spark 20"</option>
+                    <option>Rainbow Girl</option>
+                    <option>Zoom Draisienne</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Quantité *</label>
+                  <input type="number" name="qty" min="1" value="10" required>
+                </div>
+                <div class="form-group">
+                  <label>Prix unitaire fournisseur (€) *</label>
+                  <input type="number" name="unitCost" min="0" step="0.01" placeholder="ex: 67.50" required>
+                </div>
+              </div>
+              <div style="display:flex;gap:10px;margin-top:8px;">
+                <button type="submit" class="btn btn-primary">✅ Valider la commande</button>
+                <button type="button" class="btn btn-outline" onclick="toggleSupplierForm()">Annuler</button>
+              </div>
+            </form>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <div class="card-title">Historique commandes fournisseurs</div>
+                <div class="card-subtitle">Commandes passées + transmissions automatiques depuis les commandes clients</div>
+              </div>
+            </div>
+            <div class="card-body">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>N° Commande</th>
+                    <th>Date</th>
+                    <th>Fournisseur</th>
+                    <th>Produit(s)</th>
+                    <th>Total</th>
+                    <th>Statut</th>
+                    <th>Commande client</th>
+                  </tr>
+                </thead>
+                <tbody id="sup-orders-tbody"></tbody>
+              </table>
             </div>
           </div>
-          <div class="card-body">
-            <table class="data-table">
-              <thead>
-                <tr>
-                  <th>N° Commande</th>
-                  <th>Date</th>
-                  <th>Fournisseur</th>
-                  <th>Produit(s)</th>
-                  <th>Total</th>
-                  <th>Statut</th>
-                  <th>Commande client</th>
-                </tr>
-              </thead>
-              <tbody id="sup-orders-tbody"></tbody>
-            </table>
-          </div>
         </div>
+
       </section>
 
       <!-- ===== MESSAGES ===== -->
@@ -474,6 +494,17 @@
     <div class="modal-footer">
       <button class="btn btn-outline btn-sm" onclick="closeModal()">Fermer</button>
     </div>
+  </div>
+</div>
+
+<!-- ===== MODAL FOURNISSEUR ===== -->
+<div class="modal-overlay" id="supplier-modal" onclick="if(event.target===this)closeSupplierModal()">
+  <div class="modal" style="max-width:640px;">
+    <div class="modal-header">
+      <div class="modal-title" id="supplier-modal-title">Fournisseur</div>
+      <button class="modal-close" onclick="closeSupplierModal()">✕</button>
+    </div>
+    <div class="modal-body" id="supplier-modal-body"></div>
   </div>
 </div>
 

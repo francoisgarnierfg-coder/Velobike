@@ -54,6 +54,63 @@ const FAKE_CUSTOMERS = [
 
 const SUPPLIERS = ['CycloPro Distribution', 'VéloImport SAS', 'KidsBike Europe', 'SportCycle France'];
 
+/* ─── Fiches fournisseurs ──────────────────────────── */
+function getSuppliers()   { return JSON.parse(localStorage.getItem('vk_admin_suppliers') || 'null'); }
+function saveSuppliers(d) { localStorage.setItem('vk_admin_suppliers', JSON.stringify(d)); }
+
+function generateMockSuppliers() {
+  return [
+    {
+      id: 'SFICHE-001',
+      name: 'CycloPro Distribution',
+      email: 'commandes@cyclopro.fr',
+      contactName: 'Pierre Leblanc',
+      phone: '01 42 00 12 34',
+      address: '45 rue de la Forge, 93200 Saint-Denis',
+      products: ['mini-bolide', 'zoom-drais', 'primo-12', 'spark-14'],
+      leadTime: '3-5 jours ouvrés',
+      costRatio: 0.60,
+      notes: 'Commande minimum 5 unités par référence. Livraison palettisée.',
+    },
+    {
+      id: 'SFICHE-002',
+      name: 'VéloImport SAS',
+      email: 'orders@veloimport.eu',
+      contactName: 'Sarah König',
+      phone: '03 67 12 00 55',
+      address: '12 Europapark, 67100 Strasbourg',
+      products: ['junior-16', 'trail-18', 'explorer-20'],
+      leadTime: '5-8 jours ouvrés',
+      costRatio: 0.62,
+      notes: 'Fournisseur européen — Paiement sous 30 jours.',
+    },
+    {
+      id: 'SFICHE-003',
+      name: 'KidsBike Europe',
+      email: 'pro@kidsbike.eu',
+      contactName: 'Marc Delacroix',
+      phone: '04 72 35 00 21',
+      address: '8 Parc Technologique, 69800 Saint-Priest',
+      products: ['avanti-24', 'street-kid-bmx', 'dirt-pro-bmx', 'rainbow-girl'],
+      leadTime: '4-6 jours ouvrés',
+      costRatio: 0.58,
+      notes: 'Spécialiste BMX et vélos enfants premium.',
+    },
+    {
+      id: 'SFICHE-004',
+      name: 'SportCycle France',
+      email: 'b2b@sportcycle.fr',
+      contactName: 'Isabelle Renaud',
+      phone: '05 56 88 00 77',
+      address: '3 Zone Industrielle Nord, 33290 Blanquefort',
+      products: ['e-spark'],
+      leadTime: '7-10 jours ouvrés',
+      costRatio: 0.65,
+      notes: 'Spécialiste VAE enfants. Garantie 2 ans pièces.',
+    },
+  ];
+}
+
 /* ─── Utilitaires ──────────────────────────────────── */
 function daysAgo(n) {
   const d = new Date();
@@ -237,6 +294,8 @@ function initData() {
   if (!supOrders) { supOrders = generateMockSupplierOrders(orders); saveSupOrders(supOrders); }
   let payments = getPayments();
   if (!payments) { payments = generateMockPayments(orders); savePayments(payments); }
+  let suppliers = getSuppliers();
+  if (!suppliers) { suppliers = generateMockSuppliers(); saveSuppliers(suppliers); }
 }
 
 /* ─── Génération de facture HTML ───────────────────── */
@@ -568,6 +627,21 @@ function openOrderModal(orderId) {
       <select class="status-select" id="status-select-modal" onchange="updateOrderStatus('${order.id}', this.value)">
         ${Object.entries(STATUS_LABELS).map(([k,v]) => `<option value="${k}" ${k === order.status ? 'selected' : ''}>${v}</option>`).join('')}
       </select>
+    </div>
+
+    <div class="dropship-section">
+      <div class="dropship-section-title">🚛 Actions dropshipping</div>
+      <div class="dropship-actions">
+        ${order.supplierTransmitted
+          ? '<span class="badge badge-confirmed" style="padding:6px 12px;">✓ Transmis au fournisseur</span>'
+          : `<button class="btn btn-primary" onclick="transmitToSupplier('${order.id}')">🚛 Transmettre au fournisseur</button>`}
+        <div class="tracking-input-group">
+          <input type="text" id="tracking-modal-input" class="tracking-input"
+            placeholder="N° de suivi ex: FR123456789"
+            value="${order.trackingNumber || ''}">
+          <button class="btn btn-outline btn-sm" onclick="saveTracking('${order.id}')">💾 Sauvegarder tracking</button>
+        </div>
+      </div>
     </div>`;
 
   openModal();
@@ -598,12 +672,14 @@ function renderInventory() {
   const alertEl = el('low-stock-alert');
   if (alertEl) alertEl.style.display = lowStockCount > 0 ? 'flex' : 'none';
 
+  const allSuppliers = getSuppliers() || [];
   tbody.innerHTML = inventory.map((p, i) => {
     const low = p.stock <= p.threshold;
     const catBadge = p.category === 'draisienne' ? 'badge-confirmed'
       : p.category === 'bmx' ? 'badge-processing'
       : p.category === 'electric' ? 'badge-shipped'
       : 'badge-pending';
+    const supplier = allSuppliers.find(s => s.products.includes(p.id));
     return `<tr class="${low ? 'low-stock' : ''}">
       <td>
         <div class="td-product">
@@ -616,6 +692,9 @@ function renderInventory() {
       </td>
       <td><span class="badge ${catBadge}">${p.category}</span></td>
       <td><strong>${fmtPrice(p.price)}</strong></td>
+      <td style="font-size:.8rem;color:var(--gray);">${supplier
+        ? `<span style="font-weight:600;color:var(--dark);">${supplier.name}</span>`
+        : '<span style="opacity:.5;">—</span>'}</td>
       <td>
         <input type="number" class="stock-input" value="${p.stock}" min="0"
           onchange="updateStock(${i}, this.value)">
@@ -884,6 +963,294 @@ function openInvoice(orderId) {
   win.document.close();
 }
 
+/* ─── FICHES FOURNISSEURS ────────────────────────────── */
+let currentSupplierTab = 'profiles';
+
+function switchSupplierTab(tab) {
+  currentSupplierTab = tab;
+  document.querySelectorAll('#section-suppliers .section-tab').forEach(b => {
+    b.classList.toggle('active', b.dataset.tab === tab);
+  });
+  document.querySelectorAll('.sup-tab-content').forEach(c => {
+    c.classList.toggle('active', c.id === 'sup-tab-' + tab);
+  });
+  if (tab === 'profiles') {
+    renderSupplierProfiles();
+  } else {
+    populateSupplierSelect();
+    renderSupplierOrders();
+  }
+}
+
+function populateSupplierSelect() {
+  const select = el('sup-order-supplier-select');
+  if (!select) return;
+  const suppliers = getSuppliers() || [];
+  select.innerHTML = '<option value="">— Choisir —</option>' +
+    suppliers.map(s => `<option value="${s.name}">${s.name}</option>`).join('');
+}
+
+function renderSupplierProfiles() {
+  const suppliers  = getSuppliers()  || [];
+  const inventory  = getInventory()  || [];
+  const container  = el('supplier-profiles-grid');
+  if (!container) return;
+
+  if (suppliers.length === 0) {
+    container.innerHTML = `<div style="text-align:center;padding:56px;color:var(--gray);">
+      <div style="font-size:2.5rem;margin-bottom:12px;opacity:.3;">🚛</div>
+      <div style="font-weight:600;">Aucun fournisseur configuré</div>
+      <div style="font-size:.8rem;margin-top:4px;">Cliquez sur "Nouveau fournisseur" pour en ajouter un.</div>
+    </div>`;
+    return;
+  }
+
+  container.innerHTML = suppliers.map(s => {
+    const productNames = s.products
+      .map(pid => inventory.find(p => p.id === pid)?.name)
+      .filter(Boolean);
+    return `
+    <div class="supplier-card">
+      <div class="supplier-card-header">
+        <div class="supplier-card-avatar">${s.name[0]}</div>
+        <div class="supplier-card-info">
+          <div class="supplier-card-name">${s.name}</div>
+          <div class="supplier-card-contact">${s.contactName}</div>
+        </div>
+        <div class="supplier-card-actions">
+          <button class="btn-icon" onclick="openSupplierProfileModal('${s.id}')" title="Modifier">✏️</button>
+          <button class="btn-icon" onclick="deleteSupplierProfile('${s.id}')" title="Supprimer">🗑️</button>
+        </div>
+      </div>
+      <div class="supplier-card-details">
+        <div class="supplier-detail-row">📧 <a href="mailto:${s.email}" style="color:var(--primary);">${s.email}</a></div>
+        <div class="supplier-detail-row">📞 ${s.phone}</div>
+        <div class="supplier-detail-row">📍 <span style="color:var(--gray);font-size:.78rem;">${s.address}</span></div>
+        <div class="supplier-detail-row">⏱️ Délai : <strong>${s.leadTime}</strong></div>
+        <div class="supplier-detail-row">💰 Coût achat : <strong>${Math.round(s.costRatio * 100)}%</strong> du prix de vente</div>
+      </div>
+      <div class="supplier-card-products">
+        <div class="supplier-products-label">${productNames.length} produit(s) associé(s)</div>
+        <div class="supplier-products-tags">
+          ${productNames.slice(0, 5).map(n => `<span class="product-tag">${n}</span>`).join('')}
+          ${productNames.length > 5 ? `<span class="product-tag">+${productNames.length - 5}</span>` : ''}
+        </div>
+      </div>
+      ${s.notes ? `<div class="supplier-card-notes">${s.notes}</div>` : ''}
+    </div>`;
+  }).join('');
+}
+
+function openSupplierProfileModal(id) {
+  const suppliers = getSuppliers() || [];
+  const supplier  = id ? suppliers.find(s => s.id === id) : null;
+  const inventory = getInventory() || [];
+
+  const productCheckboxes = inventory.map(p => `
+    <label class="product-checkbox-label">
+      <input type="checkbox" name="products" value="${p.id}" ${supplier?.products?.includes(p.id) ? 'checked' : ''}>
+      ${p.name}
+    </label>`).join('');
+
+  el('supplier-modal-title').textContent = supplier ? `Modifier — ${supplier.name}` : 'Nouveau fournisseur';
+  el('supplier-modal-body').innerHTML = `
+    <form id="supplier-profile-form" onsubmit="saveSupplierProfile(event,'${id || ''}')">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Nom du fournisseur *</label>
+          <input type="text" name="name" required value="${supplier?.name || ''}">
+        </div>
+        <div class="form-group">
+          <label>Contact principal *</label>
+          <input type="text" name="contactName" required value="${supplier?.contactName || ''}">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Email *</label>
+          <input type="email" name="email" required value="${supplier?.email || ''}">
+        </div>
+        <div class="form-group">
+          <label>Téléphone</label>
+          <input type="text" name="phone" value="${supplier?.phone || ''}">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Adresse</label>
+        <input type="text" name="address" value="${supplier?.address || ''}">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Délai livraison</label>
+          <input type="text" name="leadTime" placeholder="ex: 3-5 jours ouvrés" value="${supplier?.leadTime || ''}">
+        </div>
+        <div class="form-group">
+          <label>Coût d'achat (% du prix de vente)</label>
+          <input type="number" name="costRatio" min="1" max="99" step="1" value="${supplier ? Math.round(supplier.costRatio * 100) : 60}">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Notes internes</label>
+        <textarea name="notes" rows="2">${supplier?.notes || ''}</textarea>
+      </div>
+      <div class="form-group">
+        <label>Produits associés (cochez ceux que ce fournisseur expédie)</label>
+        <div class="products-checkbox-grid">${productCheckboxes}</div>
+      </div>
+      <div style="display:flex;gap:10px;margin-top:16px;">
+        <button type="submit" class="btn btn-primary">💾 ${supplier ? 'Enregistrer' : 'Créer le fournisseur'}</button>
+        <button type="button" class="btn btn-outline" onclick="closeSupplierModal()">Annuler</button>
+      </div>
+    </form>`;
+
+  openSupplierModal();
+}
+
+function saveSupplierProfile(e, id) {
+  e.preventDefault();
+  const form = e.target;
+  const data = new FormData(form);
+  const products = Array.from(form.querySelectorAll('input[name="products"]:checked')).map(cb => cb.value);
+  const suppliers = getSuppliers() || [];
+
+  const updated = {
+    name: data.get('name'),
+    contactName: data.get('contactName'),
+    email: data.get('email'),
+    phone: data.get('phone'),
+    address: data.get('address'),
+    leadTime: data.get('leadTime'),
+    costRatio: parseInt(data.get('costRatio')) / 100,
+    notes: data.get('notes'),
+    products,
+  };
+
+  if (id) {
+    const idx = suppliers.findIndex(s => s.id === id);
+    if (idx >= 0) suppliers[idx] = { ...suppliers[idx], ...updated };
+  } else {
+    suppliers.push({ id: 'SFICHE-' + Date.now(), ...updated });
+  }
+  saveSuppliers(suppliers);
+  closeSupplierModal();
+  renderSupplierProfiles();
+  showToast(id ? 'Fournisseur mis à jour' : 'Fournisseur créé', 'success');
+}
+
+function deleteSupplierProfile(id) {
+  if (!confirm('Supprimer ce fournisseur ?')) return;
+  const suppliers = (getSuppliers() || []).filter(s => s.id !== id);
+  saveSuppliers(suppliers);
+  renderSupplierProfiles();
+  showToast('Fournisseur supprimé', 'success');
+}
+
+function openSupplierModal()  { el('supplier-modal').classList.add('open');    document.body.style.overflow = 'hidden'; }
+function closeSupplierModal() { el('supplier-modal').classList.remove('open'); document.body.style.overflow = ''; }
+
+/* ─── TRANSMISSION AU FOURNISSEUR ────────────────────── */
+function transmitToSupplier(orderId) {
+  const orders    = getOrders()    || [];
+  const order     = orders.find(o => o.id === orderId);
+  if (!order) return;
+  const suppliers = getSuppliers() || [];
+  const inventory = getInventory() || [];
+
+  // Regrouper les articles par fournisseur
+  const groups = {};
+  order.items.forEach(item => {
+    const product  = inventory.find(p => p.name === item.name);
+    const supplier = product ? suppliers.find(s => s.products.includes(product.id)) : null;
+    if (!supplier) return;
+    if (!groups[supplier.id]) groups[supplier.id] = { supplier, items: [] };
+    groups[supplier.id].items.push(item);
+  });
+
+  if (Object.keys(groups).length === 0) {
+    showToast('Aucun fournisseur associé aux produits de cette commande', 'error');
+    return;
+  }
+
+  const supOrders = getSupOrders() || [];
+
+  Object.values(groups).forEach(({ supplier, items }) => {
+    const itemsList  = items.map(it => `- ${it.name} × ${it.qty}`).join('\n');
+    const totalCost  = Math.round(items.reduce((s, it) => s + it.price * it.qty, 0) * supplier.costRatio);
+    const subject    = `Commande dropshipping ${order.id} — VéloKid`;
+    const body =
+`Bonjour ${supplier.contactName},
+
+Nous vous transmettons la commande dropshipping suivante à préparer et expédier directement à notre client.
+
+--- COMMANDE ${order.id} ---
+
+Produit(s) à expédier :
+${itemsList}
+
+Livraison directe chez le client :
+${order.customer.name}
+${order.customer.address}
+${order.customer.postalCode} ${order.customer.city}
+Tél : ${order.customer.phone || 'non renseigné'}
+
+Montant de votre commande : ${totalCost} €
+
+Merci de nous communiquer le numéro de suivi dès l'expédition.
+
+Cordialement,
+VéloKid — admin@velokid.fr`;
+
+    window.open(`mailto:${supplier.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`);
+
+    supOrders.unshift({
+      id: supId(Date.now() % 10000),
+      date: new Date().toISOString(),
+      supplier: supplier.name,
+      orderRef: orderId,
+      items: items.map(it => ({ name: it.name, qty: it.qty, unitCost: Math.round(it.price * supplier.costRatio) })),
+      total: totalCost,
+      status: 'pending',
+      transmitted: true,
+    });
+  });
+
+  saveSupOrders(supOrders);
+
+  // Mettre à jour la commande
+  const idx = orders.findIndex(o => o.id === orderId);
+  if (idx >= 0) {
+    if (['pending','confirmed'].includes(orders[idx].status)) orders[idx].status = 'processing';
+    orders[idx].supplierTransmitted = true;
+    saveOrders(orders);
+  }
+
+  showToast('Email fournisseur ouvert — commande passée en préparation', 'success');
+  closeModal();
+  renderOrders();
+  renderDashboard();
+}
+
+/* ─── SUIVI / TRACKING ───────────────────────────────── */
+function saveTracking(orderId) {
+  const input = el('tracking-modal-input');
+  if (!input) return;
+  const tracking = input.value.trim();
+  if (!tracking) { showToast('Entrez un numéro de suivi', 'error'); return; }
+
+  const orders = getOrders() || [];
+  const idx = orders.findIndex(o => o.id === orderId);
+  if (idx < 0) return;
+  orders[idx].trackingNumber = tracking;
+  if (['processing','confirmed','pending'].includes(orders[idx].status)) {
+    orders[idx].status = 'shipped';
+  }
+  saveOrders(orders);
+  showToast('N° de suivi enregistré — statut → Expédiée', 'success');
+  openOrderModal(orderId);
+  renderOrders();
+  renderDashboard();
+}
+
 /* ─── NAVIGATION SECTIONS ─────────────────────────── */
 function showSection(name) {
   document.querySelectorAll('.admin-section').forEach(s => s.classList.remove('active'));
@@ -897,7 +1264,7 @@ function showSection(name) {
     dashboard:  { title: 'Tableau de bord', sub: 'Vue d\'ensemble' },
     orders:     { title: 'Commandes clients', sub: 'Gestion des commandes' },
     inventory:  { title: 'Gestion des stocks', sub: 'Inventaire produits' },
-    suppliers:  { title: 'Commandes fournisseurs', sub: 'Dropshipping' },
+    suppliers:  { title: 'Fournisseurs', sub: 'Fiches & commandes dropshipping' },
     contacts:   { title: 'Messages & Contacts', sub: 'Boîte de réception' },
     payments:   { title: 'Suivi des paiements', sub: 'Encaissements' },
     invoices:   { title: 'Factures', sub: 'Archive des factures' },
@@ -912,7 +1279,7 @@ function showSection(name) {
     dashboard: renderDashboard,
     orders:    () => renderOrders(),
     inventory: renderInventory,
-    suppliers: renderSupplierOrders,
+    suppliers: () => switchSupplierTab(currentSupplierTab),
     contacts:  renderContacts,
     payments:  () => renderPayments(),
     invoices:  renderInvoices,

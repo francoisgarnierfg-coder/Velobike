@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Qui sommes-nous — VéloKid</title>
+  <meta name="description" content="L'histoire de VéloKid, notre passion pour les vélos d'enfants, notre équipe et nos valeurs.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <nav class="navbar scrolled" id="navbar">
+    <div class="navbar-inner">
+      <a href="index.html" class="logo">
+        <svg class="logo-svg" viewBox="0 0 52 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="11" cy="28" r="8.5" stroke="#FF6B35" stroke-width="2.5"/>
+          <circle cx="11" cy="28" r="2.5" fill="#FF6B35"/>
+          <circle cx="41" cy="28" r="8.5" stroke="#FF6B35" stroke-width="2.5"/>
+          <circle cx="41" cy="28" r="2.5" fill="#FF6B35"/>
+          <line x1="11" y1="28" x2="24" y2="28" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="24" y1="28" x2="21" y2="11" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="21" y1="11" x2="35" y2="14" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="24" y1="28" x2="35" y2="14" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="35" y1="14" x2="41" y2="28" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="35" y1="14" x2="35" y2="8" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="31.5" y1="8" x2="39" y2="8" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="17.5" y1="10" x2="25" y2="10" stroke="#FF6B35" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="24" cy="28" r="3" fill="#FF6B35"/>
+        </svg>
+        Vélo<span>Kid</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html"           class="nav-link" data-i18n="nav_home">Accueil</a></li>
+        <li><a href="boutique.html"        class="nav-link" data-i18n="nav_shop">Boutique</a></li>
+        <li><a href="qui-sommes-nous.html" class="nav-link active" data-i18n="nav_about">Qui sommes-nous</a></li>
+        <li><a href="contact.html"         class="nav-link" data-i18n="nav_contact">Contact</a></li>
+      </ul>
+      <div style="display:flex;align-items:center;gap:8px">
+        <button class="lang-toggle" id="langToggle" onclick="toggleLanguage()">🇬🇧 EN</button>
+        <button class="cart-trigger" onclick="showCartDrawer()">🛒<span class="cart-badge">0</span></button>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+  <nav class="mobile-nav" id="mobileNav">
+    <a href="index.html"           class="nav-link" data-i18n="nav_home">🏠 Accueil</a>
+    <a href="boutique.html"        class="nav-link" data-i18n="nav_shop">🚲 Boutique</a>
+    <a href="qui-sommes-nous.html" class="nav-link active" data-i18n="nav_about">👥 Qui sommes-nous</a>
+    <a href="contact.html"         class="nav-link" data-i18n="nav_contact">✉️ Contact</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="page-hero">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="index.html">Accueil</a> › <span>Qui sommes-nous</span>
+      </div>
+      <h1 data-i18n="ph_about_title">Notre histoire</h1>
+      <p data-i18n="ph_about_desc">Depuis 2015, VéloKid accompagne des milliers d'enfants dans leur première grande aventure à deux roues.</p>
+    </div>
+  </section>
+
+  <!-- NOTRE HISTOIRE -->
+  <section class="section">
+    <div class="container">
+      <div class="about-story">
+        <div class="about-img fade-up">
+          <img src="images/about.jpg" alt="L'équipe VéloKid en action" loading="lazy">
+        </div>
+        <div class="fade-up delay-2">
+          <span class="section-label" data-i18n="about_label">💡 Notre histoire</span>
+          <h2 data-i18n="about_title">Nés de la passion, guidés par la sécurité</h2>
+          <p style="margin-bottom:16px" data-i18n="about_p1">Tout a commencé en 2015 lorsque Thomas et Claire, parents de trois enfants, ont cherché désespérément un vélo à la fois sûr, léger et durable pour leur fils aîné. Déçus par les options disponibles, ils ont décidé de créer VéloKid.</p>
+          <p style="margin-bottom:24px" data-i18n="about_p2">Aujourd'hui, VéloKid est devenu la référence française des vélos pour enfants. Chaque modèle est personnellement testé par notre équipe — et par nos propres enfants ! — avant d'être mis en vente.</p>
+          <ul class="about-list">
+            <li>Plus de 500 familles satisfaites en France</li>
+            <li>12 modèles soigneusement sélectionnés chaque saison</li>
+            <li>Norme européenne EN 14765 respectée sur 100 % du catalogue</li>
+            <li>Service après-vente réactif sous 24h</li>
+            <li>Livraison gratuite et retour facile sous 30 jours</li>
+          </ul>
+          <div style="margin-top:32px">
+            <a href="boutique.html" class="btn btn-primary">Découvrir nos vélos ›</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NOS VALEURS -->
+  <section class="section features-bg">
+    <div class="container text-center">
+      <span class="section-label fade-up" data-i18n="values_label">❤️ Ce qui nous anime</span>
+      <h2 class="section-title fade-up delay-1" data-i18n="values_title">Nos valeurs</h2>
+      <p class="section-desc fade-up delay-2" data-i18n="values_desc">Ces principes guident chacune de nos décisions, de la sélection des produits à la relation client.</p>
+      <div class="values-grid">
+        <div class="value-card fade-up delay-1">
+          <div class="value-icon">🛡️</div>
+          <h3 data-i18n="val1_title">Sécurité avant tout</h3>
+          <p data-i18n="val1_desc">Chaque vélo est testé selon les normes européennes EN 14765. Aucun compromis sur la sécurité de vos enfants.</p>
+        </div>
+        <div class="value-card fade-up delay-2">
+          <div class="value-icon">🌱</div>
+          <h3 data-i18n="val2_title">Durabilité</h3>
+          <p data-i18n="val2_desc">Nos vélos sont conçus pour durer plusieurs années. Nous favorisons les matériaux robustes et les marques responsables.</p>
+        </div>
+        <div class="value-card fade-up delay-3">
+          <div class="value-icon">😊</div>
+          <h3 data-i18n="val3_title">Plaisir de rouler</h3>
+          <p data-i18n="val3_desc">Un vélo, c'est avant tout une source de bonheur. Nous sélectionnons des modèles qui donnent envie de pédaler.</p>
+        </div>
+        <div class="value-card fade-up delay-1">
+          <div class="value-icon">🤝</div>
+          <h3 data-i18n="val4_title">Confiance</h3>
+          <p data-i18n="val4_desc">Avis clients authentiques, descriptions honnêtes, prix transparents. Nous construisons une relation durable avec nos familles.</p>
+        </div>
+        <div class="value-card fade-up delay-2">
+          <div class="value-icon">📞</div>
+          <h3 data-i18n="val5_title">Service humain</h3>
+          <p data-i18n="val5_desc">Une vraie équipe de passionnés répond à vos questions, vous conseille et vous accompagne avant et après l'achat.</p>
+        </div>
+        <div class="value-card fade-up delay-3">
+          <div class="value-icon">♻️</div>
+          <h3 data-i18n="val6_title">Engagement vert</h3>
+          <p data-i18n="val6_desc">Emballages recyclés, livraison en vrac limitée, partenariat avec 1 % for the Planet. Le vélo, c'est déjà écolo !</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NOTRE ÉQUIPE -->
+  <section class="section">
+    <div class="container text-center">
+      <span class="section-label fade-up" data-i18n="team_label">👥 Notre équipe</span>
+      <h2 class="section-title fade-up delay-1" data-i18n="team_title">Des passionnés à votre service</h2>
+      <p class="section-desc fade-up delay-2" data-i18n="team_desc">Une équipe soudée de parents, cyclistes et experts produit qui mettent tout leur cœur pour vous aider.</p>
+      <div class="team-grid">
+        <div class="team-card fade-up delay-1">
+          <div class="team-avatar">
+            <img src="images/team.jpg" alt="Thomas Lefèvre" loading="lazy">
+          </div>
+          <div class="team-name">Thomas Lefèvre</div>
+          <div class="team-role" data-i18n="team1_role">Co-fondateur & CEO</div>
+          <p style="font-size:.82rem" data-i18n="team1_desc">Papa de 3 enfants, ancien coureur cycliste amateur. Il teste chaque nouveau modèle avec ses kids le week-end.</p>
+        </div>
+        <div class="team-card fade-up delay-2">
+          <div class="team-avatar">
+            <img src="images/about.jpg" alt="Claire Martin" loading="lazy">
+          </div>
+          <div class="team-name">Claire Martin</div>
+          <div class="team-role" data-i18n="team2_role">Co-fondatrice & Directrice produit</div>
+          <p style="font-size:.82rem" data-i18n="team2_desc">Ergothérapeute de formation, elle veille à ce que chaque vélo soit parfaitement adapté au développement moteur des enfants.</p>
+        </div>
+        <div class="team-card fade-up delay-3">
+          <div class="team-avatar">
+            <img src="images/shop-hero.jpg" alt="Julien Dubois" loading="lazy">
+          </div>
+          <div class="team-name">Julien Dubois</div>
+          <div class="team-role" data-i18n="team3_role">Expert technique & SAV</div>
+          <p style="font-size:.82rem" data-i18n="team3_desc">Mécanicien vélo depuis 15 ans, Julien assemble, règle et inspecte chaque commande avant expédition.</p>
+        </div>
+        <div class="team-card fade-up delay-4">
+          <div class="team-avatar">
+            <img src="images/bike1.jpg" alt="Amandine Rousseau" loading="lazy">
+          </div>
+          <div class="team-name">Amandine Rousseau</div>
+          <div class="team-role" data-i18n="team4_role">Responsable relation client</div>
+          <p style="font-size:.82rem" data-i18n="team4_desc">Toujours souriante et réactive, Amandine est votre interlocutrice principale pour toute question ou conseil d'achat.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHIFFRES -->
+  <section class="section testimonials-bg">
+    <div class="container text-center">
+      <span class="section-label fade-up" data-i18n="stats_label">📊 En chiffres</span>
+      <h2 class="section-title fade-up delay-1" data-i18n="stats_title">VéloKid en quelques chiffres</h2>
+      <div class="grid-4" style="margin-top:48px">
+        <div class="fade-up delay-1" style="color:white">
+          <div style="font-size:3rem;font-weight:800;color:var(--accent)">10+</div>
+          <div style="font-size:1rem;font-weight:600;margin-top:8px" data-i18n="stat_y_lbl">Années d'expérience</div>
+          <p style="color:rgba(255,255,255,.6);font-size:.85rem;margin-top:8px" data-i18n="stat_y_desc">Fondés en 2015, nous avons grandi avec vous</p>
+        </div>
+        <div class="fade-up delay-2" style="color:white">
+          <div style="font-size:3rem;font-weight:800;color:var(--accent)">500+</div>
+          <div style="font-size:1rem;font-weight:600;margin-top:8px" data-i18n="stat_f_lbl">Familles satisfaites</div>
+          <p style="color:rgba(255,255,255,.6);font-size:.85rem;margin-top:8px" data-i18n="stat_f_desc">Des milliers d'enfants ont reçu leur premier vélo VéloKid</p>
+        </div>
+        <div class="fade-up delay-3" style="color:white">
+          <div style="font-size:3rem;font-weight:800;color:var(--accent)">4.9/5</div>
+          <div style="font-size:1rem;font-weight:600;margin-top:8px" data-i18n="stat_r_lbl">Note moyenne</div>
+          <p style="color:rgba(255,255,255,.6);font-size:.85rem;margin-top:8px" data-i18n="stat_r_desc">Sur plus de 300 avis vérifiés Google et Trustpilot</p>
+        </div>
+        <div class="fade-up delay-4" style="color:white">
+          <div style="font-size:3rem;font-weight:800;color:var(--accent)">24h</div>
+          <div style="font-size:1rem;font-weight:600;margin-top:8px" data-i18n="stat_h_lbl">Délai de réponse</div>
+          <p style="color:rgba(255,255,255,.6);font-size:.85rem;margin-top:8px" data-i18n="stat_h_desc">Notre équipe répond à toutes vos questions en moins de 24h</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section">
+    <div class="container">
+      <div class="cta-banner fade-up">
+        <h2 data-i18n="cta_fam_title">Rejoignez la famille VéloKid !</h2>
+        <p data-i18n="cta_fam_desc">Des centaines de familles nous font déjà confiance. Offrez à votre enfant son premier vélo de qualité.</p>
+        <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+          <a href="boutique.html" class="btn btn-white btn-lg" data-i18n="cta_fam_btn1">Voir les vélos ›</a>
+          <a href="contact.html" class="btn btn-outline btn-lg" style="border-color:white;color:white" data-i18n="cta_fam_btn2">Nous contacter</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="logo"><svg class="logo-svg" viewBox="0 0 52 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="11" cy="28" r="8.5" stroke="#FF6B35" stroke-width="2.5"/>
+          <circle cx="11" cy="28" r="2.5" fill="#FF6B35"/>
+          <circle cx="41" cy="28" r="8.5" stroke="#FF6B35" stroke-width="2.5"/>
+          <circle cx="41" cy="28" r="2.5" fill="#FF6B35"/>
+          <line x1="11" y1="28" x2="24" y2="28" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="24" y1="28" x2="21" y2="11" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="21" y1="11" x2="35" y2="14" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="24" y1="28" x2="35" y2="14" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="35" y1="14" x2="41" y2="28" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="35" y1="14" x2="35" y2="8" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="31.5" y1="8" x2="39" y2="8" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="17.5" y1="10" x2="25" y2="10" stroke="#FF6B35" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="24" cy="28" r="3" fill="#FF6B35"/>
+        </svg>Vélo<span>Kid</span></a>
+          <p data-i18n="footer_desc">Spécialiste du vélo enfant depuis 2015. Nous croyons que chaque enfant mérite un vélo sûr, beau et adapté à sa taille.</p>
+          <div class="footer-socials">
+            <button class="social-btn">f</button>
+            <button class="social-btn">📷</button>
+            <button class="social-btn">♪</button>
+            <button class="social-btn">▶</button>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4 data-i18n="footer_shop">Boutique</h4>
+          <ul class="footer-links">
+            <li><a href="boutique.html" data-i18n="footer_all">Tous les vélos</a></li>
+            <li><a href="boutique.html" data-i18n="footer_drais">Draisiennes</a></li>
+            <li><a href="boutique.html" data-i18n="footer_12">12 & 14 pouces</a></li>
+            <li><a href="boutique.html" data-i18n="footer_20">20 & 24 pouces</a></li>
+            <li><a href="boutique.html" data-i18n="footer_bmx">BMX & Freestyle</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4 data-i18n="footer_info">Informations</h4>
+          <ul class="footer-links">
+            <li><a href="qui-sommes-nous.html" data-i18n="footer_about">Qui sommes-nous</a></li>
+            <li><a href="contact.html" data-i18n="nav_contact">Contact</a></li>
+            <li><a href="suivi-commande.html" data-i18n="footer_track">Suivi commande</a></li>
+            <li><a href="cgv.html" data-i18n="footer_cgv">CGV</a></li>
+            <li><a href="cgv.html" data-i18n="footer_legal">Mentions légales</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4 data-i18n="footer_contact">Contact</h4>
+          <ul class="footer-links">
+            <li>📍 12 rue des Cyclistes, 75011 Paris</li>
+            <li>📞 01 23 45 67 89</li>
+            <li>✉️ bonjour@velokid.fr</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p data-i18n="footer_copy">© 2025 VéloKid. Tous droits réservés.</p>
+        <div class="footer-bottom-links">
+          <a href="cgv.html" data-i18n="footer_cgv">CGV</a>
+          <a href="cgv.html" data-i18n="footer_legal">Mentions légales</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="cart-toast" id="cartToast">
+    <span class="cart-toast-icon">✅</span>
+    <span id="cartToastMsg">Produit ajouté au panier !</span>
+  </div>
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <aside class="cart-drawer" id="cartDrawer">
+    <div class="cart-drawer-header">
+      <h3 data-i18n="cart_drawer_title">Panier</h3>
+      <button class="cart-drawer-close" onclick="closeCartDrawer()">✕</button>
+    </div>
+    <div class="cart-drawer-body"></div>
+    <div class="cart-drawer-footer"></div>
+  </aside>
+  <script src="translations.js"></script>
+  <script src="cart.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

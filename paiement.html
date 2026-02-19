@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Paiement — VéloKid</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <nav class="navbar scrolled" id="navbar">
+    <div class="navbar-inner">
+      <a href="index.html" class="logo">
+        <svg class="logo-svg" viewBox="0 0 52 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="11" cy="28" r="8.5" stroke="#FF6B35" stroke-width="2.5"/>
+          <circle cx="11" cy="28" r="2.5" fill="#FF6B35"/>
+          <circle cx="41" cy="28" r="8.5" stroke="#FF6B35" stroke-width="2.5"/>
+          <circle cx="41" cy="28" r="2.5" fill="#FF6B35"/>
+          <line x1="11" y1="28" x2="24" y2="28" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="24" y1="28" x2="21" y2="11" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="21" y1="11" x2="35" y2="14" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="24" y1="28" x2="35" y2="14" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="35" y1="14" x2="41" y2="28" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="35" y1="14" x2="35" y2="8" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="31.5" y1="8" x2="39" y2="8" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="17.5" y1="10" x2="25" y2="10" stroke="#FF6B35" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="24" cy="28" r="3" fill="#FF6B35"/>
+        </svg>
+        Vélo<span>Kid</span>
+      </a>
+      <div style="display:flex;align-items:center;gap:8px">
+        <button class="lang-toggle" id="langToggle" onclick="toggleLanguage()">🇬🇧 EN</button>
+      </div>
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="page-hero">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="index.html">Accueil</a> › <a href="panier.html">Panier</a> › <a href="commande.html">Livraison</a> › <span data-i18n="pay_title">Paiement</span>
+      </div>
+      <h1 data-i18n="pay_title">Paiement sécurisé</h1>
+      <p data-i18n="pay_desc">Vos données bancaires sont chiffrées et sécurisées.</p>
+    </div>
+  </section>
+
+  <!-- STEPS -->
+  <section class="section-sm">
+    <div class="container">
+      <div class="pay-steps">
+        <div class="pay-step done">✓ Panier</div>
+        <div class="pay-step done">✓ Livraison</div>
+        <div class="pay-step active" data-i18n="pay_title">Paiement</div>
+        <div class="pay-step">Confirmation</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORMULAIRE PAIEMENT -->
+  <section class="section" style="padding-top:0" id="paySection">
+    <div class="container">
+      <div class="checkout-layout">
+        <!-- Formulaire CB -->
+        <div class="checkout-form-section">
+          <h2 data-i18n="pay_title">Paiement sécurisé</h2>
+
+          <!-- Logos CB -->
+          <div style="display:flex;gap:10px;margin-bottom:24px;align-items:center">
+            <div style="background:#1a1f71;color:white;font-size:.7rem;font-weight:700;padding:5px 12px;border-radius:4px;letter-spacing:.05em">VISA</div>
+            <div style="display:flex;align-items:center;gap:-4px">
+              <div style="width:28px;height:28px;border-radius:50%;background:#EB001B;opacity:.9"></div>
+              <div style="width:28px;height:28px;border-radius:50%;background:#F79E1B;margin-left:-10px;opacity:.9"></div>
+            </div>
+            <div style="background:#003087;color:white;font-size:.7rem;font-weight:700;padding:5px 10px;border-radius:4px">PayPal</div>
+            <div style="margin-left:auto;display:flex;align-items:center;gap:6px;font-size:.8rem;color:var(--gray)">🔒 SSL sécurisé</div>
+          </div>
+
+          <form id="payForm" onsubmit="submitPayment(event)" autocomplete="off">
+            <div class="form-group">
+              <label data-i18n="pay_card_num">Numéro de carte *</label>
+              <input type="text" id="cardNum" maxlength="19" placeholder="1234 5678 9012 3456" required
+                oninput="formatCard(this)" style="font-family:monospace;font-size:1rem;letter-spacing:.05em">
+            </div>
+            <div class="form-group">
+              <label data-i18n="pay_name">Nom sur la carte *</label>
+              <input type="text" id="cardName" placeholder="MARIE DUPONT" required
+                oninput="this.value=this.value.toUpperCase()">
+            </div>
+            <div class="card-row">
+              <div class="form-group">
+                <label data-i18n="pay_expiry">Expiration *</label>
+                <input type="text" id="cardExp" maxlength="5" placeholder="MM/AA" required oninput="formatExpiry(this)">
+              </div>
+              <div class="form-group">
+                <label data-i18n="pay_cvv">CVV *</label>
+                <input type="text" id="cardCvv" maxlength="3" placeholder="123" required>
+              </div>
+              <div class="form-group">
+                <label>&nbsp;</label>
+                <div style="background:var(--light-gray);border-radius:var(--radius);padding:12px;font-size:.75rem;color:var(--gray);line-height:1.5">
+                  3 chiffres au dos de votre carte
+                </div>
+              </div>
+            </div>
+            <!-- 3D Secure -->
+            <div style="background:rgba(30,77,140,.06);border:1px solid rgba(30,77,140,.2);border-radius:var(--radius);padding:14px;margin-bottom:20px;font-size:.82rem;color:var(--secondary)">
+              🛡️ Votre banque peut vous demander une authentification 3D Secure (code SMS ou application bancaire).
+            </div>
+            <div id="payTotal" style="font-size:1.2rem;font-weight:700;color:var(--dark);margin-bottom:20px;text-align:right"></div>
+            <button type="submit" class="btn btn-primary btn-lg" style="width:100%;justify-content:center;font-size:1.05rem" id="payBtn">
+              <span id="payBtnText">🔒 Payer —</span>
+            </button>
+          </form>
+        </div>
+
+        <!-- Récap -->
+        <div class="order-recap" id="payRecap">
+          <h3 data-i18n="order_summary">Récapitulatif</h3>
+          <div id="payRecapItems"></div>
+          <div style="border-top:1px solid #ddd;margin-top:16px;padding-top:16px">
+            <div class="summary-row"><span data-i18n="cart_shipping">Livraison</span><span id="payShipping">—</span></div>
+            <div class="summary-row total"><span data-i18n="order_total">Total</span><span id="payRecapTotal" style="color:var(--primary)">—</span></div>
+          </div>
+          <!-- Garanties -->
+          <div style="margin-top:20px;display:flex;flex-direction:column;gap:8px">
+            <div style="font-size:.78rem;color:var(--gray);display:flex;align-items:center;gap:8px">🔒 Paiement 100 % sécurisé</div>
+            <div style="font-size:.78rem;color:var(--gray);display:flex;align-items:center;gap:8px">↩️ Retour gratuit sous 30 jours</div>
+            <div style="font-size:.78rem;color:var(--gray);display:flex;align-items:center;gap:8px">🛡️ Garantie 2 ans</div>
+            <div style="font-size:.78rem;color:var(--gray);display:flex;align-items:center;gap:8px">📞 SAV disponible 6j/7</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SUCCÈS (caché jusqu'au paiement) -->
+  <div id="successSection" style="display:none">
+    <section class="section">
+      <div class="container">
+        <div class="pay-success">
+          <div class="pay-success-icon">🎉</div>
+          <h2 data-i18n="pay_success_title">Commande confirmée !</h2>
+          <p style="font-size:1.05rem;max-width:480px;margin:0 auto 32px" data-i18n="pay_success_desc">
+            Merci pour votre achat ! Vous recevrez un email de confirmation sous peu.
+          </p>
+          <div style="background:var(--light-gray);border-radius:var(--radius-lg);padding:24px;max-width:480px;margin:0 auto 32px;text-align:left">
+            <div style="font-size:.85rem;color:var(--gray);margin-bottom:8px">Numéro de commande</div>
+            <div style="font-size:1.2rem;font-weight:700;color:var(--dark)" id="orderNumber"></div>
+          </div>
+          <p style="font-size:.9rem;color:var(--gray);margin-bottom:32px">
+            Votre vélo sera expédié sous 2 jours ouvrés. Vous recevrez un email avec le numéro de suivi.
+          </p>
+          <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+            <a id="track-link" href="suivi-commande.html" class="btn btn-primary btn-lg">📍 Suivre ma commande</a>
+            <a href="index.html" class="btn btn-outline btn-lg">Retour à l'accueil</a>
+            <a href="boutique.html" class="btn btn-outline btn-lg">Continuer mes achats</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p data-i18n="footer_copy">© 2025 VéloKid. Tous droits réservés.</p>
+        <div class="footer-bottom-links">
+          <a href="cgv.html" data-i18n="footer_cgv">CGV</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="cart-toast" id="cartToast"><span class="cart-toast-icon">✅</span><span id="cartToastMsg"></span></div>
+
+  <script src="translations.js"></script>
+  <script src="cart.js"></script>
+  <script src="admin.js"></script>
+  <script src="script.js"></script>
+  <script>
+  // Formateurs carte
+  function formatCard(input) {
+    let v = input.value.replace(/\D/g,'').slice(0,16);
+    input.value = v.replace(/(.{4})/g,'$1 ').trim();
+  }
+  function formatExpiry(input) {
+    let v = input.value.replace(/\D/g,'').slice(0,4);
+    if (v.length >= 3) v = v.slice(0,2) + '/' + v.slice(2);
+    input.value = v;
+  }
+
+  function renderPayRecap() {
+    const cart = getCart();
+    const total = getTotal();
+    const shipping = total >= 99 ? 0 : 9.9;
+    const grand = total + shipping;
+    document.getElementById('payRecapItems').innerHTML = cart.map(item => `
+      <div class="recap-item">
+        <div class="recap-item-img"><img src="${item.img}" alt="${item.name}" loading="lazy"></div>
+        <div class="recap-item-info">
+          <div class="recap-item-name">${item.name} <span style="color:var(--gray)">×${item.qty}</span></div>
+          <div class="recap-item-price">${(item.price*item.qty).toFixed(2)} €</div>
+        </div>
+      </div>`).join('');
+    document.getElementById('payShipping').innerHTML = shipping === 0 ? '<span style="color:var(--success)">Gratuite ✓</span>' : '9,90 €';
+    document.getElementById('payRecapTotal').textContent = grand.toFixed(2) + ' €';
+    document.getElementById('payTotal').textContent = `Total : ${grand.toFixed(2)} €`;
+    document.getElementById('payBtnText').textContent = `🔒 Payer ${grand.toFixed(2)} €`;
+  }
+
+  function submitPayment(e) {
+    e.preventDefault();
+    const btn = document.getElementById('payBtn');
+    const txt = document.getElementById('payBtnText');
+    btn.disabled = true;
+    txt.textContent = '⏳ Traitement en cours…';
+    // Simulation 3D Secure
+    setTimeout(() => {
+      txt.textContent = '🔐 Authentification 3D Secure…';
+    }, 1200);
+    setTimeout(() => {
+      // Générer le numéro de commande
+      const orderNum = 'VK-' + Date.now().toString().slice(-8);
+      // Sauvegarder la commande dans le back-office
+      try {
+        const order = buildOrderFromCart(orderNum);
+        if (order) saveOrderToAdmin(order);
+        // Stocker l'email pour le lien de suivi
+        const info = JSON.parse(localStorage.getItem('velokid_order') || '{}');
+        document.getElementById('track-link').href =
+          'suivi-commande.html?id=' + orderNum + '&email=' + encodeURIComponent(info.email || '');
+      } catch(err) { /* mode démo, pas de données */ }
+      // Succès
+      document.getElementById('paySection').style.display = 'none';
+      document.getElementById('successSection').style.display = 'block';
+      document.getElementById('orderNumber').textContent = orderNum;
+      clearCart();
+      applyTranslations();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 3000);
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    if (getCart().length === 0 && !document.getElementById('successSection').style.display) {
+      window.location.href = 'panier.html';
+    }
+    renderPayRecap();
+  });
+  </script>
+</body>
+</html>

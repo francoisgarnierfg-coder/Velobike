@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VéloKid — Suivi de commande</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .tracking-hero {
+      background: linear-gradient(135deg, #0D1B2A 0%, #1E4D8C 100%);
+      color: white;
+      padding: 100px 0 60px;
+      text-align: center;
+    }
+    .tracking-hero h1 { font-size: clamp(1.6rem,4vw,2.4rem); font-weight: 800; margin-bottom: 12px; }
+    .tracking-hero p  { color: rgba(255,255,255,.7); max-width: 480px; margin: 0 auto; }
+
+    .tracking-card {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.12);
+      padding: 40px;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .track-form { display: flex; flex-direction: column; gap: 16px; }
+    .track-form .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group label { font-size: .85rem; font-weight: 600; color: var(--dark); }
+    .form-group input {
+      padding: 13px 16px;
+      border: 1.5px solid #E5E7EB;
+      border-radius: 10px;
+      font-family: var(--font);
+      font-size: .9rem;
+      transition: border-color .2s;
+    }
+    .form-group input:focus { outline: none; border-color: var(--primary); }
+    .track-btn {
+      padding: 14px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-family: var(--font);
+      font-size: .95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background .2s, transform .1s;
+    }
+    .track-btn:hover { background: var(--primary-dark); transform: translateY(-1px); }
+
+    .track-error {
+      background: #FEF2F2;
+      border: 1px solid #FECACA;
+      border-radius: 10px;
+      padding: 14px 16px;
+      color: #991B1B;
+      font-size: .88rem;
+      display: none;
+    }
+
+    /* ─── Résultat ─── */
+    .order-result { display: none; }
+    .order-result-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .order-number { font-size: 1.1rem; font-weight: 700; }
+    .order-date   { font-size: .82rem; color: var(--gray); margin-top: 2px; }
+
+    /* Timeline */
+    .track-timeline {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 32px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+    }
+    .track-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1;
+      min-width: 90px;
+    }
+    .track-step-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #E5E7EB;
+      color: var(--gray);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      position: relative;
+      z-index: 1;
+      transition: all .3s;
+      flex-shrink: 0;
+    }
+    .track-step.done    .track-step-icon { background: var(--success); color: white; font-size: .9rem; }
+    .track-step.current .track-step-icon { background: var(--primary); color: white; box-shadow: 0 0 0 6px rgba(255,107,53,.15); }
+    .track-step-label {
+      font-size: .72rem;
+      color: var(--gray);
+      text-align: center;
+      margin-top: 8px;
+      line-height: 1.35;
+      font-weight: 500;
+    }
+    .track-step.done .track-step-label,
+    .track-step.current .track-step-label { color: var(--dark); font-weight: 700; }
+    .track-connector {
+      flex: 1;
+      height: 3px;
+      background: #E5E7EB;
+      margin-top: 21px;
+      min-width: 16px;
+      transition: background .5s;
+    }
+    .track-connector.done { background: var(--success); }
+
+    /* Infos */
+    .order-info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+    .info-block {
+      background: var(--light-gray);
+      padding: 14px 16px;
+      border-radius: 10px;
+    }
+    .info-block-label { font-size: .72rem; font-weight: 600; color: var(--gray); text-transform: uppercase; letter-spacing: .04em; margin-bottom: 4px; }
+    .info-block-value { font-size: .88rem; font-weight: 500; color: var(--dark); line-height: 1.5; }
+
+    /* Articles */
+    .track-items { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+    .track-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 12px;
+      border: 1px solid #E5E7EB;
+      border-radius: 10px;
+    }
+    .track-item img { width: 52px; height: 52px; object-fit: cover; border-radius: 8px; background: var(--light-gray); }
+    .track-item-name { font-weight: 600; font-size: .88rem; }
+    .track-item-sub  { font-size: .78rem; color: var(--gray); }
+    .track-item-price { margin-left: auto; font-weight: 700; color: var(--primary); }
+
+    /* Totaux */
+    .track-totals {
+      border-top: 1px solid #E5E7EB;
+      padding-top: 14px;
+    }
+    .tot-row { display: flex; justify-content: space-between; padding: 4px 0; font-size: .88rem; color: var(--gray); }
+    .tot-row.total { font-weight: 800; font-size: 1rem; color: var(--dark); border-top: 1px solid #E5E7EB; margin-top: 8px; padding-top: 10px; }
+
+    /* Actions */
+    .track-actions { display: flex; gap: 12px; margin-top: 24px; flex-wrap: wrap; }
+    .track-actions .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 22px;
+      border-radius: 10px;
+      font-family: var(--font);
+      font-size: .88rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      text-decoration: none;
+      transition: all .2s;
+    }
+    .btn-dl { background: var(--primary); color: white; }
+    .btn-dl:hover { background: var(--primary-dark); }
+    .btn-back { background: var(--light-gray); color: var(--dark); border: 1.5px solid #E5E7EB; }
+    .btn-back:hover { border-color: var(--primary); color: var(--primary); }
+
+    /* Cancelled */
+    .cancelled-banner {
+      background: #FEF2F2;
+      border: 1px solid #FECACA;
+      border-radius: 10px;
+      padding: 16px;
+      color: #991B1B;
+      text-align: center;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    /* Tracking number */
+    .tracking-number-box {
+      background: linear-gradient(135deg, #0D1B2A, #1E4D8C);
+      color: white;
+      padding: 16px 20px;
+      border-radius: 10px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .tracking-number-icon { font-size: 1.4rem; }
+    .tracking-number-label { font-size: .75rem; opacity: .7; }
+    .tracking-number-val   { font-size: 1rem; font-weight: 700; letter-spacing: .04em; }
+
+    /* Demo note */
+    .demo-note {
+      background: #FFFBEB;
+      border: 1px solid #FDE68A;
+      border-radius: 10px;
+      padding: 12px 16px;
+      font-size: .8rem;
+      color: #92400E;
+      margin-bottom: 20px;
+    }
+
+    @media (max-width: 600px) {
+      .tracking-card { padding: 24px 20px; }
+      .track-form .form-row { grid-template-columns: 1fr; }
+      .order-info-grid { grid-template-columns: 1fr; }
+      .track-step-label { font-size: .65rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="navbar scrolled" id="navbar" style="position:relative;">
+    <div class="navbar-inner">
+      <a href="index.html" class="logo">
+        <svg class="logo-svg" viewBox="0 0 52 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="11" cy="28" r="8.5" stroke="#FF6B35" stroke-width="2.5"/>
+          <circle cx="11" cy="28" r="2.5" fill="#FF6B35"/>
+          <circle cx="41" cy="28" r="8.5" stroke="#FF6B35" stroke-width="2.5"/>
+          <circle cx="41" cy="28" r="2.5" fill="#FF6B35"/>
+          <line x1="11" y1="28" x2="24" y2="28" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="24" y1="28" x2="21" y2="11" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="21" y1="11" x2="35" y2="14" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="24" y1="28" x2="35" y2="14" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="35" y1="14" x2="41" y2="28" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="35" y1="14" x2="35" y2="8" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="31.5" y1="8" x2="39" y2="8" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="17.5" y1="10" x2="25" y2="10" stroke="#FF6B35" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="24" cy="28" r="3" fill="#FF6B35"/>
+        </svg>
+        Vélo<span>Kid</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html"           class="nav-link">Accueil</a></li>
+        <li><a href="boutique.html"        class="nav-link">Boutique</a></li>
+        <li><a href="qui-sommes-nous.html" class="nav-link">Qui sommes-nous</a></li>
+        <li><a href="contact.html"         class="nav-link">Contact</a></li>
+      </ul>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <a href="boutique.html" class="btn btn-primary btn-sm">Voir les vélos ›</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="tracking-hero">
+    <h1>📍 Suivi de commande</h1>
+    <p>Entrez votre numéro de commande et votre email pour suivre votre livraison et télécharger votre facture.</p>
+  </div>
+
+  <!-- MAIN -->
+  <section class="section" style="padding:48px 0 80px;">
+    <div class="container">
+      <div class="tracking-card">
+
+        <div class="demo-note">
+          💡 <strong>Démo :</strong> Essayez avec le numéro <strong>VK-001000</strong> et l'email <strong>sophie.martin@gmail.com</strong>
+        </div>
+
+        <!-- FORMULAIRE -->
+        <div id="track-form-container">
+          <h2 style="font-size:1.15rem;font-weight:700;margin-bottom:20px;">Suivre ma commande</h2>
+          <div id="track-error" class="track-error">Aucune commande trouvée avec ces informations. Vérifiez votre numéro de commande et email.</div>
+          <form class="track-form" onsubmit="trackOrder(event)">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="track-id">Numéro de commande</label>
+                <input type="text" id="track-id" placeholder="ex: VK-001000" required
+                       style="text-transform:uppercase;" oninput="this.value=this.value.toUpperCase()">
+              </div>
+              <div class="form-group">
+                <label for="track-email">Adresse email</label>
+                <input type="email" id="track-email" placeholder="votre@email.com" required>
+              </div>
+            </div>
+            <button type="submit" class="track-btn">🔍 Rechercher ma commande</button>
+          </form>
+        </div>
+
+        <!-- RÉSULTAT -->
+        <div id="order-result" class="order-result">
+
+          <div class="order-result-header">
+            <div>
+              <div class="order-number" id="res-order-id"></div>
+              <div class="order-date" id="res-order-date"></div>
+            </div>
+            <span id="res-status-badge"></span>
+          </div>
+
+          <!-- Cancelled -->
+          <div id="cancelled-banner" class="cancelled-banner" style="display:none;">
+            ❌ Cette commande a été annulée.
+          </div>
+
+          <!-- Timeline -->
+          <div id="track-timeline" class="track-timeline"></div>
+
+          <!-- Numéro de suivi -->
+          <div id="tracking-number-box" class="tracking-number-box" style="display:none;">
+            <div class="tracking-number-icon">🚚</div>
+            <div>
+              <div class="tracking-number-label">Numéro de suivi transporteur</div>
+              <div class="tracking-number-val" id="tracking-number-val"></div>
+            </div>
+          </div>
+
+          <!-- Infos commande -->
+          <div class="order-info-grid">
+            <div class="info-block">
+              <div class="info-block-label">Livraison à</div>
+              <div class="info-block-value" id="res-address"></div>
+            </div>
+            <div class="info-block">
+              <div class="info-block-label">Contact</div>
+              <div class="info-block-value" id="res-contact"></div>
+            </div>
+          </div>
+
+          <!-- Articles -->
+          <h3 style="font-size:.88rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--gray);margin-bottom:12px;">Articles commandés</h3>
+          <div class="track-items" id="res-items"></div>
+
+          <!-- Totaux -->
+          <div class="track-totals" id="res-totals"></div>
+
+          <!-- Actions -->
+          <div class="track-actions">
+            <button class="btn btn-dl" id="btn-invoice" onclick="openInvoiceFromTracking()">🧾 Télécharger ma facture</button>
+            <button class="btn btn-back" onclick="resetTracking()">← Nouvelle recherche</button>
+            <a href="boutique.html" class="btn btn-back">🚲 Continuer mes achats</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER simplifié -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>© 2025 VéloKid. Tous droits réservés.</p>
+        <div class="footer-bottom-links">
+          <a href="cgv.html">CGV</a>
+          <a href="cgv.html">Mentions légales</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="admin.js"></script>
+  <script>
+    let currentOrder = null;
+
+    const STATUS_STEPS = ['pending','confirmed','processing','shipped','delivered'];
+    const STEP_CONFIG = [
+      { key: 'pending',    icon: '📦', label: 'Commande\nreçue' },
+      { key: 'confirmed',  icon: '✅', label: 'Paiement\nconfirmé' },
+      { key: 'processing', icon: '⚙️', label: 'En\npréparation' },
+      { key: 'shipped',    icon: '🚚', label: 'Expédiée' },
+      { key: 'delivered',  icon: '🏠', label: 'Livrée' },
+    ];
+
+    const STATUS_FR = {
+      pending: 'En attente', confirmed: 'Confirmée', processing: 'En préparation',
+      shipped: 'Expédiée', delivered: 'Livrée', cancelled: 'Annulée'
+    };
+    const STATUS_BADGE_CLASS = {
+      pending:'badge-pending', confirmed:'badge-confirmed', processing:'badge-processing',
+      shipped:'badge-shipped', delivered:'badge-delivered', cancelled:'badge-cancelled'
+    };
+
+    function fmtDate(iso) {
+      return new Date(iso).toLocaleDateString('fr-FR',{day:'2-digit',month:'long',year:'numeric'});
+    }
+    function fmtPrice(n) {
+      return n.toLocaleString('fr-FR',{minimumFractionDigits:2,maximumFractionDigits:2})+' €';
+    }
+
+    function trackOrder(e) {
+      e.preventDefault();
+      const id    = document.getElementById('track-id').value.trim().toUpperCase();
+      const email = document.getElementById('track-email').value.trim().toLowerCase();
+
+      // Chercher dans localStorage
+      const orders = JSON.parse(localStorage.getItem('vk_admin_orders') || '[]');
+      const order = orders.find(o =>
+        o.id.toUpperCase() === id &&
+        o.customer.email.toLowerCase() === email
+      );
+
+      const errEl = document.getElementById('track-error');
+      if (!order) {
+        errEl.style.display = 'block';
+        return;
+      }
+      errEl.style.display = 'none';
+      currentOrder = order;
+      displayResult(order);
+    }
+
+    function displayResult(order) {
+      document.getElementById('track-form-container').style.display = 'none';
+      const resultEl = document.getElementById('order-result');
+      resultEl.style.display = 'block';
+
+      // Header
+      document.getElementById('res-order-id').textContent = 'Commande ' + order.id;
+      document.getElementById('res-order-date').textContent = 'Passée le ' + fmtDate(order.date);
+      document.getElementById('res-status-badge').innerHTML =
+        `<span class="badge ${STATUS_BADGE_CLASS[order.status]}">${STATUS_FR[order.status]}</span>`;
+
+      // Cancelled
+      document.getElementById('cancelled-banner').style.display = order.status === 'cancelled' ? 'block' : 'none';
+
+      // Timeline
+      const timelineEl = document.getElementById('track-timeline');
+      const currentIdx = STATUS_STEPS.indexOf(order.status);
+      let html = '';
+      STEP_CONFIG.forEach((step, i) => {
+        const idx = STATUS_STEPS.indexOf(step.key);
+        const isDone    = order.status !== 'cancelled' && idx < currentIdx;
+        const isCurrent = order.status !== 'cancelled' && idx === currentIdx;
+        const cls = isDone ? 'done' : isCurrent ? 'current' : '';
+        html += `<div class="track-step ${cls}">
+          <div class="track-step-icon">${isDone ? '✓' : step.icon}</div>
+          <div class="track-step-label">${step.label.replace('\n','<br>')}</div>
+        </div>`;
+        if (i < STEP_CONFIG.length - 1) {
+          html += `<div class="track-connector ${isDone ? 'done' : ''}"></div>`;
+        }
+      });
+      timelineEl.innerHTML = html;
+
+      // Numéro de suivi
+      if (order.trackingNumber && (order.status === 'shipped' || order.status === 'delivered')) {
+        document.getElementById('tracking-number-box').style.display = 'flex';
+        document.getElementById('tracking-number-val').textContent = order.trackingNumber;
+      } else {
+        document.getElementById('tracking-number-box').style.display = 'none';
+      }
+
+      // Infos
+      document.getElementById('res-address').innerHTML =
+        `${order.customer.address}<br>${order.customer.postalCode} ${order.customer.city}`;
+      document.getElementById('res-contact').innerHTML =
+        `${order.customer.name}<br>${order.customer.email}`;
+
+      // Articles
+      document.getElementById('res-items').innerHTML = order.items.map(it => `
+        <div class="track-item">
+          <img src="${it.img}" alt="${it.name}" onerror="this.style.display='none'">
+          <div>
+            <div class="track-item-name">${it.name}</div>
+            <div class="track-item-sub">${it.age || ''} — Qté : ${it.qty}</div>
+          </div>
+          <div class="track-item-price">${fmtPrice(it.price * it.qty)}</div>
+        </div>`).join('');
+
+      // Totaux
+      const tva = 0.2;
+      const ht = order.subtotal / (1 + tva);
+      document.getElementById('res-totals').innerHTML = `
+        <div class="tot-row"><span>Sous-total HT</span><span>${fmtPrice(ht)}</span></div>
+        <div class="tot-row"><span>TVA (20 %)</span><span>${fmtPrice(order.subtotal - ht)}</span></div>
+        <div class="tot-row"><span>Livraison</span><span>${order.shipping === 0 ? 'Gratuite' : fmtPrice(order.shipping)}</span></div>
+        <div class="tot-row total"><span>Total TTC</span><span>${fmtPrice(order.total)}</span></div>`;
+
+      // Bouton facture
+      document.getElementById('btn-invoice').style.display = order.invoice ? 'flex' : 'none';
+    }
+
+    function openInvoiceFromTracking() {
+      if (!currentOrder || !currentOrder.invoice) return;
+      const win = window.open('', '_blank');
+      win.document.write(currentOrder.invoice.html);
+      win.document.close();
+    }
+
+    function resetTracking() {
+      currentOrder = null;
+      document.getElementById('order-result').style.display = 'none';
+      document.getElementById('track-form-container').style.display = 'block';
+      document.getElementById('track-error').style.display = 'none';
+    }
+
+    // Pré-remplir si paramètre URL
+    const params = new URLSearchParams(location.search);
+    if (params.get('id')) {
+      document.getElementById('track-id').value = params.get('id').toUpperCase();
+    }
+    if (params.get('email')) {
+      document.getElementById('track-email').value = params.get('email');
+    }
+  </script>
+</body>
+</html>

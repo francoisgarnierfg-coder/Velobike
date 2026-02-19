@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Boutique — VéloKid | Vélos pour enfants</title>
+  <meta name="description" content="Découvrez nos 12 modèles de vélos pour enfants : draisiennes, 12 à 24 pouces, BMX et vélo électrique. Livraison gratuite dès 99 €.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ==================== NAVIGATION ==================== -->
+  <nav class="navbar scrolled" id="navbar">
+    <div class="navbar-inner">
+      <a href="index.html" class="logo">
+        <svg class="logo-svg" viewBox="0 0 52 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="11" cy="28" r="8.5" stroke="#FF6B35" stroke-width="2.5"/>
+          <circle cx="11" cy="28" r="2.5" fill="#FF6B35"/>
+          <circle cx="41" cy="28" r="8.5" stroke="#FF6B35" stroke-width="2.5"/>
+          <circle cx="41" cy="28" r="2.5" fill="#FF6B35"/>
+          <line x1="11" y1="28" x2="24" y2="28" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="24" y1="28" x2="21" y2="11" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="21" y1="11" x2="35" y2="14" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="24" y1="28" x2="35" y2="14" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="35" y1="14" x2="41" y2="28" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="35" y1="14" x2="35" y2="8" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="31.5" y1="8" x2="39" y2="8" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="17.5" y1="10" x2="25" y2="10" stroke="#FF6B35" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="24" cy="28" r="3" fill="#FF6B35"/>
+        </svg>
+        Vélo<span>Kid</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html"           class="nav-link"        data-i18n="nav_home">Accueil</a></li>
+        <li><a href="boutique.html"        class="nav-link active" data-i18n="nav_shop">Boutique</a></li>
+        <li><a href="qui-sommes-nous.html" class="nav-link"        data-i18n="nav_about">Qui sommes-nous</a></li>
+        <li><a href="contact.html"         class="nav-link"        data-i18n="nav_contact">Contact</a></li>
+      </ul>
+      <div style="display:flex;align-items:center;gap:8px">
+        <button class="lang-toggle" id="langToggle" onclick="toggleLanguage()">🇬🇧 EN</button>
+        <button class="cart-trigger" onclick="showCartDrawer()">🛒<span class="cart-badge">0</span></button>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+  <nav class="mobile-nav" id="mobileNav">
+    <a href="index.html"           class="nav-link"        data-i18n="nav_home">🏠 Accueil</a>
+    <a href="boutique.html"        class="nav-link active" data-i18n="nav_shop">🚲 Boutique</a>
+    <a href="qui-sommes-nous.html" class="nav-link"        data-i18n="nav_about">👥 Qui sommes-nous</a>
+    <a href="contact.html"         class="nav-link"        data-i18n="nav_contact">✉️ Contact</a>
+    <div style="display:flex;gap:10px;margin-top:8px">
+      <button class="lang-toggle" onclick="toggleLanguage()" id="langToggleMobile">🇬🇧 EN</button>
+    </div>
+  </nav>
+
+  <!-- ==================== PAGE HERO ==================== -->
+  <section class="page-hero">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="index.html">Accueil</a> › <span data-i18n="nav_shop">Boutique</span>
+      </div>
+      <h1 data-i18n="ph_shop_title">Notre boutique</h1>
+      <p data-i18n="ph_shop_desc">Trouvez le vélo idéal pour votre enfant parmi nos 12 modèles soigneusement sélectionnés.</p>
+    </div>
+  </section>
+
+  <!-- ==================== BOUTIQUE ==================== -->
+  <section class="section">
+    <div class="container">
+
+      <!-- Filtres -->
+      <div class="shop-filters">
+        <button class="filter-btn active" data-filter="all"       data-i18n="filter_all">Tous</button>
+        <button class="filter-btn"        data-filter="draisienne" data-i18n="filter_drais">Draisienne</button>
+        <button class="filter-btn"        data-filter="12"         data-i18n="filter_12">12 pouces</button>
+        <button class="filter-btn"        data-filter="14"         data-i18n="filter_14">14 pouces</button>
+        <button class="filter-btn"        data-filter="16"         data-i18n="filter_16">16 pouces</button>
+        <button class="filter-btn"        data-filter="18"         data-i18n="filter_18">18 pouces</button>
+        <button class="filter-btn"        data-filter="20"         data-i18n="filter_20">20 pouces</button>
+        <button class="filter-btn"        data-filter="24"         data-i18n="filter_24">24 pouces</button>
+        <button class="filter-btn"        data-filter="bmx"        data-i18n="filter_bmx">BMX</button>
+        <button class="filter-btn"        data-filter="electric"   data-i18n="filter_elec">Électrique</button>
+        <span class="shop-count" id="shopCount" data-i18n="shop_count">12 vélos disponibles</span>
+      </div>
+
+      <!-- Grille produits -->
+      <div class="grid-3" id="productGrid">
+
+        <!-- 1. Mini Bolide -->
+        <div class="product-card" data-category="draisienne">
+          <div class="product-img">
+            <img src="images/bike1.jpg" alt="Mini Bolide" loading="lazy">
+            <span class="product-badge new" data-i18n="badge_new">Nouveau</span>
+            <button class="product-wishlist" title="Ajouter aux favoris">♡</button>
+          </div>
+          <div class="product-body">
+            <div class="product-age" data-i18n="age_drais_1">1–3 ans · Draisienne</div>
+            <div class="product-name">Mini Bolide</div>
+            <p class="product-desc" data-i18n="desc_mini">Légère (2,9 kg), selle ultra-réglable, coque de protection intégrée. Idéale pour les premiers équilibres.</p>
+            <div class="product-footer">
+              <div><div class="product-price">89 €</div></div>
+              <button class="add-to-cart" onclick="addToCart('Mini Bolide',89,'images/bike1.jpg','mini-bolide','1–3 ans · Draisienne','draisienne')" data-i18n="btn_add">🛒 Ajouter</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Zoom Draisienne -->
+        <div class="product-card" data-category="draisienne">
+          <div class="product-img">
+            <img src="images/bike1.jpg" alt="Zoom Draisienne" loading="lazy">
+            <button class="product-wishlist" title="Ajouter aux favoris">♡</button>
+          </div>
+          <div class="product-body">
+            <div class="product-age" data-i18n="age_drais_2">2–4 ans · Draisienne</div>
+            <div class="product-name">Zoom Draisienne</div>
+            <p class="product-desc" data-i18n="desc_zoom">Frein arrière intégré, roues gonflables 12", guidon réglable en hauteur et en angle.</p>
+            <div class="product-footer">
+              <div><div class="product-price">79 €</div></div>
+              <button class="add-to-cart" onclick="addToCart('Zoom Draisienne',79,'images/bike1.jpg','zoom-drais','2–4 ans · Draisienne','draisienne')" data-i18n="btn_add">🛒 Ajouter</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Primo 12" -->
+        <div class="product-card" data-category="12">
+          <div class="product-img">
+            <img src="images/bike2.jpg" alt="Primo 12 pouces" loading="lazy">
+            <span class="product-badge" data-i18n="badge_best">Bestseller</span>
+            <button class="product-wishlist" title="Ajouter aux favoris">♡</button>
+          </div>
+          <div class="product-body">
+            <div class="product-age" data-i18n="age_12_2">2–4 ans · 12 pouces</div>
+            <div class="product-name">Primo 12"</div>
+            <p class="product-desc" data-i18n="desc_primo">Roues stabilisatrices amovibles, frein avant, pneus larges antidérapants pour la stabilité.</p>
+            <div class="product-footer">
+              <div><span class="product-price-old">169 €</span><div class="product-price">149 €</div></div>
+              <button class="add-to-cart" onclick="addToCart('Primo 12&quot;',149,'images/bike2.jpg','primo-12','2–4 ans · 12 pouces','12')" data-i18n="btn_add">🛒 Ajouter</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. Spark 14" -->
+        <div class="product-card" data-category="14">
+          <div class="product-img">
+            <img src="images/bike3.jpg" alt="Spark 14 pouces" loading="lazy">
+            <button class="product-wishlist" title="Ajouter aux favoris">♡</button>
+          </div>
+          <div class="product-body">
+            <div class="product-age" data-i18n="age_14_3">3–5 ans · 14 pouces</div>
+            <div class="product-name">Spark 14"</div>
+            <p class="product-desc" data-i18n="desc_spark14">Cadre léger en aluminium, double frein patins, selle confort, disponible en 5 coloris.</p>
+            <div class="product-footer">
+              <div><div class="product-price">169 €</div></div>
+              <button class="add-to-cart" onclick="addToCart('Spark 14&quot;',169,'images/bike3.jpg','spark-14','3–5 ans · 14 pouces','14')" data-i18n="btn_add">🛒 Ajouter</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. Junior 16" -->
+        <div class="product-card" data-category="16">
+          <div class="product-img">
+            <img src="images/bike3.jpg" alt="Junior 16 pouces" loading="lazy">
+            <span class="product-badge" data-i18n="badge_pop">Populaire</span>
+            <button class="product-wishlist" title="Ajouter aux favoris">♡</button>
+          </div>
+          <div class="product-body">
+            <div class="product-age" data-i18n="age_16_4">4–6 ans · 16 pouces</div>
+            <div class="product-name">Junior 16"</div>
+            <p class="product-desc" data-i18n="desc_jr16">Transmission single-speed, garde-chaîne intégral, béquille latérale, panier avant inclus.</p>
+            <div class="product-footer">
+              <div><div class="product-price">189 €</div></div>
+              <button class="add-to-cart" onclick="addToCart('Junior 16&quot;',189,'images/bike3.jpg','junior-16','4–6 ans · 16 pouces','16')" data-i18n="btn_add">🛒 Ajouter</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6. Rainbow Girl -->
+        <div class="product-card" data-category="16">
+          <div class="product-img">
+            <img src="images/bike3.jpg" alt="Rainbow Girl" loading="lazy">
+            <span class="product-badge" data-i18n="badge_pop">Populaire</span>
+            <button class="product-wishlist" title="Ajouter aux favoris">♡</button>
+          </div>
+          <div class="product-body">
+            <div class="product-age" data-i18n="age_16_4">4–6 ans · 16 pouces</div>
+            <div class="product-name">Rainbow Girl</div>
+            <p class="product-desc" data-i18n="desc_rainbow">Coloris pastels, panier avant et porte-bagage arrière, sonnette incluse, stabilisateurs amovibles.</p>
+            <div class="product-footer">
+              <div><div class="product-price">179 €</div></div>
+              <button class="add-to-cart" onclick="addToCart('Rainbow Girl',179,'images/bike3.jpg','rainbow-girl','4–6 ans · 16 pouces','16')" data-i18n="btn_add">🛒 Ajouter</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 7. Trail 18" -->
+        <div class="product-card" data-category="18">
+          <div class="product-img">
+            <img src="images/bike4.jpg" alt="Trail 18 pouces" loading="lazy">
+            <span class="product-badge new" data-i18n="badge_new">Nouveau</span>
+            <button class="product-wishlist" title="Ajouter aux favoris">♡</button>
+          </div>
+          <div class="product-body">
+            <div class="product-age" data-i18n="age_18_5">5–7 ans · 18 pouces</div>
+            <div class="product-name">Trail 18"</div>
+            <p class="product-desc" data-i18n="desc_trail">Cadre tout-terrain, dérailleur 3 vitesses, freins V-brake avant et arrière, fourche rigide.</p>
+            <div class="product-footer">
+              <div><div class="product-price">209 €</div></div>
+              <button class="add-to-cart" onclick="addToCart('Trail 18&quot;',209,'images/bike4.jpg','trail-18','5–7 ans · 18 pouces','18')" data-i18n="btn_add">🛒 Ajouter</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 8. Explorer 20" -->
+        <div class="product-card" data-category="20">
+          <div class="product-img">
+            <img src="images/bike5.jpg" alt="Explorer 20 pouces" loading="lazy">
+            <span class="product-badge" data-i18n="badge_best">Bestseller</span>
+            <button class="product-wishlist" title="Ajouter aux favoris">♡</button>
+          </div>
+          <div class="product-body">
+            <div class="product-age" data-i18n="age_20_6">6–9 ans · 20 pouces</div>
+            <div class="product-name">Explorer 20"</div>
+            <p class="product-desc" data-i18n="desc_exp20">6 vitesses Shimano Tourney, freins V-brake, porte-bidon, idéal ville et chemins.</p>
+            <div class="product-footer">
+              <div><div class="product-price">229 €</div></div>
+              <button class="add-to-cart" onclick="addToCart('Explorer 20&quot;',229,'images/bike5.jpg','explorer-20','6–9 ans · 20 pouces','20')" data-i18n="btn_add">🛒 Ajouter</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 9. Avanti 24" -->
+        <div class="product-card" data-category="24">
+          <div class="product-img">
+            <img src="images/bike5.jpg" alt="Avanti 24 pouces" loading="lazy">
+            <button class="product-wishlist" title="Ajouter aux favoris">♡</button>
+          </div>
+          <div class="product-body">
+            <div class="product-age" data-i18n="age_24_8">8–12 ans · 24 pouces</div>
+            <div class="product-name">Avanti 24"</div>
+            <p class="product-desc" data-i18n="desc_av24">21 vitesses Shimano, fourche suspendue, freins à disque mécaniques, pneus semi-slicks.</p>
+            <div class="product-footer">
+              <div><div class="product-price">289 €</div></div>
+              <button class="add-to-cart" onclick="addToCart('Avanti 24&quot;',289,'images/bike5.jpg','avanti-24','8–12 ans · 24 pouces','24')" data-i18n="btn_add">🛒 Ajouter</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 10. Street Kid BMX -->
+        <div class="product-card" data-category="bmx">
+          <div class="product-img">
+            <img src="images/bike6.jpg" alt="Street Kid BMX" loading="lazy">
+            <span class="product-badge sale">−10 %</span>
+            <button class="product-wishlist" title="Ajouter aux favoris">♡</button>
+          </div>
+          <div class="product-body">
+            <div class="product-age" data-i18n="age_bmxs">8+ ans · BMX Street</div>
+            <div class="product-name">Street Kid BMX</div>
+            <p class="product-desc" data-i18n="desc_streetbmx">Guidon 4 pièces Hi-Ten, rotor complet, pneus larges 20×2.3", pégs acier inclus.</p>
+            <div class="product-footer">
+              <div><span class="product-price-old">219 €</span><div class="product-price">199 €</div></div>
+              <button class="add-to-cart" onclick="addToCart('Street Kid BMX',199,'images/bike6.jpg','street-kid-bmx','8+ ans · BMX Street','bmx')" data-i18n="btn_add">🛒 Ajouter</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 11. Dirt Pro BMX -->
+        <div class="product-card" data-category="bmx">
+          <div class="product-img">
+            <img src="images/bike6.jpg" alt="Dirt Pro BMX" loading="lazy">
+            <button class="product-wishlist" title="Ajouter aux favoris">♡</button>
+          </div>
+          <div class="product-body">
+            <div class="product-age" data-i18n="age_bmxd">9+ ans · BMX Dirt</div>
+            <div class="product-name">Dirt Pro BMX</div>
+            <p class="product-desc" data-i18n="desc_dirtbmx">Cadre Cr-Mo double butted, roues 20", guidon chromoly, idéal pour les sauts et modules.</p>
+            <div class="product-footer">
+              <div><div class="product-price">249 €</div></div>
+              <button class="add-to-cart" onclick="addToCart('Dirt Pro BMX',249,'images/bike6.jpg','dirt-pro-bmx','9+ ans · BMX Dirt','bmx')" data-i18n="btn_add">🛒 Ajouter</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 12. E-Spark 20" -->
+        <div class="product-card" data-category="electric">
+          <div class="product-img">
+            <img src="images/bike4.jpg" alt="E-Spark 20 electrique" loading="lazy">
+            <span class="product-badge electric" data-i18n="badge_electric">Électrique</span>
+            <button class="product-wishlist" title="Ajouter aux favoris">♡</button>
+          </div>
+          <div class="product-body">
+            <div class="product-age" data-i18n="age_elec">6–10 ans · 20" électrique</div>
+            <div class="product-name">E-Spark 20"</div>
+            <p class="product-desc" data-i18n="desc_espark">Moteur 180W, batterie 24V autonomie 25 km, 3 modes d'assistance, recharge 3h.</p>
+            <div class="product-footer">
+              <div><div class="product-price">349 €</div></div>
+              <button class="add-to-cart" onclick="addToCart('E-Spark 20&quot;',349,'images/bike4.jpg','e-spark','6–10 ans · 20&quot; électrique','electric')" data-i18n="btn_add">🛒 Ajouter</button>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /productGrid -->
+    </div>
+  </section>
+
+  <!-- ==================== GUIDE DES TAILLES ==================== -->
+  <section class="section" style="background:#F8F9FA">
+    <div class="container">
+      <div class="text-center" style="margin-bottom:48px">
+        <span class="section-label fade-up" data-i18n="size_label">📏 Guide des tailles</span>
+        <h2 class="section-title fade-up delay-1" data-i18n="size_title">Choisir la bonne taille</h2>
+        <p class="section-desc fade-up delay-2" data-i18n="size_desc">La taille du vélo dépend de la hauteur de l'inseam (entrejambe) de votre enfant, pas de son âge.</p>
+      </div>
+      <div class="grid-4">
+        <div class="feature-card fade-up">
+          <div class="feature-icon">🚴</div>
+          <h3 data-i18n="size1_title">Draisienne</h3>
+          <p>18 mois – 4 ans<br>Inseam : 30–42 cm<br>Roues 10"–12"</p>
+        </div>
+        <div class="feature-card fade-up delay-1">
+          <div class="feature-icon">🚲</div>
+          <h3 data-i18n="size2_title">12–14 pouces</h3>
+          <p>2–5 ans<br>Inseam : 38–52 cm<br>Avec ou sans stabilisateurs</p>
+        </div>
+        <div class="feature-card fade-up delay-2">
+          <div class="feature-icon">🚵</div>
+          <h3 data-i18n="size3_title">16–18 pouces</h3>
+          <p>4–8 ans<br>Inseam : 48–62 cm<br>Vélos polyvalents</p>
+        </div>
+        <div class="feature-card fade-up delay-3">
+          <div class="feature-icon">🏆</div>
+          <h3 data-i18n="size4_title">20–24 pouces</h3>
+          <p>6–12 ans<br>Inseam : 54–74 cm<br>Multi-vitesses disponibles</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">
+            <svg class="logo-svg" viewBox="0 0 52 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="11" cy="28" r="8.5" stroke="#FF6B35" stroke-width="2.5"/>
+              <circle cx="11" cy="28" r="2.5" fill="#FF6B35"/>
+              <circle cx="41" cy="28" r="8.5" stroke="#FF6B35" stroke-width="2.5"/>
+              <circle cx="41" cy="28" r="2.5" fill="#FF6B35"/>
+              <line x1="11" y1="28" x2="24" y2="28" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+              <line x1="24" y1="28" x2="21" y2="11" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+              <line x1="21" y1="11" x2="35" y2="14" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+              <line x1="24" y1="28" x2="35" y2="14" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+              <line x1="35" y1="14" x2="41" y2="28" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+              <line x1="35" y1="14" x2="35" y2="8" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+              <line x1="31.5" y1="8" x2="39" y2="8" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+              <line x1="17.5" y1="10" x2="25" y2="10" stroke="#FF6B35" stroke-width="3" stroke-linecap="round"/>
+              <circle cx="24" cy="28" r="3" fill="#FF6B35"/>
+            </svg>
+            Vélo<span>Kid</span>
+          </a>
+          <p data-i18n="footer_desc">Spécialiste du vélo enfant depuis 2015. Nous croyons que chaque enfant mérite un vélo sûr, beau et adapté à sa taille.</p>
+          <div class="footer-socials">
+            <button class="social-btn" title="Facebook">f</button>
+            <button class="social-btn" title="Instagram">📷</button>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4 data-i18n="footer_shop">Boutique</h4>
+          <ul class="footer-links">
+            <li><a href="boutique.html" data-i18n="footer_all">Tous les vélos</a></li>
+            <li><a href="boutique.html" data-i18n="footer_drais">Draisiennes</a></li>
+            <li><a href="boutique.html" data-i18n="footer_12">12 &amp; 14 pouces</a></li>
+            <li><a href="boutique.html" data-i18n="footer_16">16 &amp; 18 pouces</a></li>
+            <li><a href="boutique.html" data-i18n="footer_20">20 &amp; 24 pouces</a></li>
+            <li><a href="boutique.html" data-i18n="footer_bmx">BMX &amp; Freestyle</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4 data-i18n="footer_info">Informations</h4>
+          <ul class="footer-links">
+            <li><a href="qui-sommes-nous.html" data-i18n="footer_about">Qui sommes-nous</a></li>
+            <li><a href="contact.html" data-i18n="nav_contact">Contact</a></li>
+            <li><a href="suivi-commande.html" data-i18n="footer_track">Suivi commande</a></li>
+            <li><a href="cgv.html" data-i18n="footer_cgv">CGV</a></li>
+            <li><a href="cgv.html" data-i18n="footer_return">Politique de retour</a></li>
+            <li><a href="cgv.html" data-i18n="footer_legal">Mentions légales</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4 data-i18n="footer_contact">Contact</h4>
+          <ul class="footer-links">
+            <li>📍 12 rue des Cyclistes<br>75011 Paris</li>
+            <li>📞 01 23 45 67 89</li>
+            <li>✉️ bonjour@velokid.fr</li>
+            <li>🕐 <span data-i18n="footer_hours">Lun–Sam : 9h–18h</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p data-i18n="footer_copy">© 2025 VéloKid. Tous droits réservés.</p>
+        <div class="footer-bottom-links">
+          <a href="cgv.html" data-i18n="footer_cgv">CGV</a>
+          <a href="cgv.html" data-i18n="footer_legal">Mentions légales</a>
+          <a href="cgv.html" data-i18n="footer_cookies">Cookies</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Cart Overlay + Drawer -->
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <aside class="cart-drawer" id="cartDrawer">
+    <div class="cart-drawer-header">
+      <h3 data-i18n="cart_drawer_title">Panier</h3>
+      <button class="cart-drawer-close" onclick="closeCartDrawer()">✕</button>
+    </div>
+    <div class="cart-drawer-body"></div>
+    <div class="cart-drawer-footer"></div>
+  </aside>
+
+  <div class="cart-toast" id="cartToast">
+    <span class="cart-toast-icon">✅</span>
+    <span id="cartToastMsg">Produit ajouté au panier !</span>
+  </div>
+
+  <script src="translations.js"></script>
+  <script src="cart.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

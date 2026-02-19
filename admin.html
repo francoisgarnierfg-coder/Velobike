@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VéloKid — Back-office</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+<!-- Overlay mobile sidebar -->
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+
+<div class="admin-layout">
+
+  <!-- ========== SIDEBAR ========== -->
+  <aside class="sidebar" id="sidebar">
+    <a href="index.html" class="sidebar-logo">
+      <svg viewBox="0 0 52 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="11" cy="28" r="8.5" stroke="#FF6B35" stroke-width="2.5"/>
+        <circle cx="11" cy="28" r="2.5" fill="#FF6B35"/>
+        <circle cx="41" cy="28" r="8.5" stroke="#FF6B35" stroke-width="2.5"/>
+        <circle cx="41" cy="28" r="2.5" fill="#FF6B35"/>
+        <line x1="11" y1="28" x2="24" y2="28" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="24" y1="28" x2="21" y2="11" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="21" y1="11" x2="35" y2="14" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="24" y1="28" x2="35" y2="14" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="35" y1="14" x2="41" y2="28" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="35" y1="14" x2="35" y2="8" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="31.5" y1="8" x2="39" y2="8" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="17.5" y1="10" x2="25" y2="10" stroke="#FF6B35" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="24" cy="28" r="3" fill="#FF6B35"/>
+      </svg>
+      <div>
+        Vélo<span style="color:var(--primary)">Kid</span>
+        <span class="logo-sub">Administration</span>
+      </div>
+    </a>
+
+    <nav class="sidebar-nav">
+      <div class="sidebar-section-label">Principal</div>
+      <button class="sidebar-link active" data-section="dashboard" onclick="showSection('dashboard')">
+        <span class="nav-icon">📊</span> Tableau de bord
+      </button>
+      <button class="sidebar-link" data-section="orders" onclick="showSection('orders')">
+        <span class="nav-icon">📦</span> Commandes clients
+      </button>
+      <button class="sidebar-link" data-section="inventory" onclick="showSection('inventory')">
+        <span class="nav-icon">🏭</span> Stocks
+      </button>
+
+      <div class="sidebar-section-label">Dropshipping</div>
+      <button class="sidebar-link" data-section="suppliers" onclick="showSection('suppliers')">
+        <span class="nav-icon">🚛</span> Fournisseurs
+      </button>
+
+      <div class="sidebar-section-label">Communication</div>
+      <button class="sidebar-link" data-section="contacts" onclick="showSection('contacts')">
+        <span class="nav-icon">✉️</span> Messages
+        <span class="badge-count" id="sidebar-msg-badge"></span>
+      </button>
+
+      <div class="sidebar-section-label">Finance</div>
+      <button class="sidebar-link" data-section="payments" onclick="showSection('payments')">
+        <span class="nav-icon">💳</span> Paiements
+      </button>
+      <button class="sidebar-link" data-section="invoices" onclick="showSection('invoices')">
+        <span class="nav-icon">🧾</span> Factures
+      </button>
+
+      <div class="sidebar-section-label">Liens externes</div>
+      <a class="sidebar-link" href="index.html" target="_blank">
+        <span class="nav-icon">🌐</span> Voir le site
+      </a>
+      <a class="sidebar-link" href="suivi-commande.html" target="_blank">
+        <span class="nav-icon">📍</span> Suivi client
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="sidebar-user">
+        <div class="sidebar-avatar">A</div>
+        <div class="sidebar-user-info">
+          <div class="sidebar-user-name">Administrateur</div>
+          <div class="sidebar-user-role">admin@velokid.fr</div>
+        </div>
+      </div>
+      <button class="btn-logout" onclick="handleLogout()">🚪 Se déconnecter</button>
+    </div>
+  </aside>
+
+  <!-- ========== MAIN ========== -->
+  <main class="admin-main">
+
+    <!-- Topbar -->
+    <div class="topbar">
+      <div class="topbar-left">
+        <button class="mobile-menu-toggle" onclick="toggleSidebar()">☰</button>
+        <div class="topbar-info">
+          <div class="topbar-title" id="topbar-title">Tableau de bord</div>
+          <div class="topbar-subtitle" id="topbar-sub">Vue d'ensemble</div>
+        </div>
+      </div>
+      <div class="topbar-actions">
+        <div class="topbar-date" id="topbar-date"></div>
+        <a href="boutique.html" target="_blank" class="btn btn-outline btn-sm">🛒 Boutique</a>
+      </div>
+    </div>
+
+    <div class="admin-content">
+
+      <!-- ===== DASHBOARD ===== -->
+      <section id="section-dashboard" class="admin-section">
+
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <div class="kpi-header">
+              <div class="kpi-label">Chiffre d'affaires</div>
+              <div class="kpi-icon-wrap">💰</div>
+            </div>
+            <div class="kpi-value" id="kpi-ca">—</div>
+            <div class="kpi-sub">Paiements complétés</div>
+          </div>
+          <div class="kpi-card blue">
+            <div class="kpi-header">
+              <div class="kpi-label">Commandes aujourd'hui</div>
+              <div class="kpi-icon-wrap">📦</div>
+            </div>
+            <div class="kpi-value" id="kpi-today">—</div>
+            <div class="kpi-sub">Nouvelles commandes</div>
+          </div>
+          <div class="kpi-card yellow">
+            <div class="kpi-header">
+              <div class="kpi-label">À traiter</div>
+              <div class="kpi-icon-wrap">⏳</div>
+            </div>
+            <div class="kpi-value" id="kpi-pending">—</div>
+            <div class="kpi-sub">En attente / confirmées</div>
+          </div>
+          <div class="kpi-card red">
+            <div class="kpi-header">
+              <div class="kpi-label">Messages non lus</div>
+              <div class="kpi-icon-wrap">✉️</div>
+            </div>
+            <div class="kpi-value" id="kpi-msgs">—</div>
+            <div class="kpi-sub">À répondre</div>
+          </div>
+        </div>
+
+        <div id="stock-alert-box"></div>
+
+        <div class="dashboard-grid">
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <div class="card-title">Dernières commandes</div>
+                <div class="card-subtitle">7 commandes les plus récentes</div>
+              </div>
+              <button class="btn btn-outline btn-sm" onclick="showSection('orders')">Voir tout →</button>
+            </div>
+            <div class="card-body">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>N° Commande</th>
+                    <th>Date</th>
+                    <th>Client</th>
+                    <th>Produits</th>
+                    <th>Total</th>
+                    <th>Statut</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody id="dash-orders"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">Accès rapides</div>
+            </div>
+            <div class="card-body-pad">
+              <div class="quick-actions">
+                <button class="quick-action-btn" onclick="showSection('orders')">
+                  <span class="quick-action-icon">📦</span> Gérer les commandes
+                </button>
+                <button class="quick-action-btn" onclick="showSection('inventory')">
+                  <span class="quick-action-icon">🏭</span> Mettre à jour les stocks
+                </button>
+                <button class="quick-action-btn" onclick="showSection('contacts')">
+                  <span class="quick-action-icon">✉️</span> Lire les messages
+                </button>
+                <button class="quick-action-btn" onclick="showSection('payments')">
+                  <span class="quick-action-icon">💳</span> Voir les paiements
+                </button>
+                <button class="quick-action-btn" onclick="showSection('invoices')">
+                  <span class="quick-action-icon">🧾</span> Consulter les factures
+                </button>
+                <a href="suivi-commande.html" target="_blank" class="quick-action-btn">
+                  <span class="quick-action-icon">📍</span> Page suivi client
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== COMMANDES ===== -->
+      <section id="section-orders" class="admin-section">
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Commandes clients</div>
+              <div class="card-subtitle">Cliquez sur 👁 pour voir le détail et modifier le statut</div>
+            </div>
+            <div class="filter-bar">
+              <button class="filter-btn active" data-filter="all"       onclick="renderOrders('all')">Toutes</button>
+              <button class="filter-btn" data-filter="pending"          onclick="renderOrders('pending')">En attente</button>
+              <button class="filter-btn" data-filter="confirmed"        onclick="renderOrders('confirmed')">Confirmées</button>
+              <button class="filter-btn" data-filter="processing"       onclick="renderOrders('processing')">En préparation</button>
+              <button class="filter-btn" data-filter="shipped"          onclick="renderOrders('shipped')">Expédiées</button>
+              <button class="filter-btn" data-filter="delivered"        onclick="renderOrders('delivered')">Livrées</button>
+              <button class="filter-btn" data-filter="cancelled"        onclick="renderOrders('cancelled')">Annulées</button>
+            </div>
+          </div>
+          <div class="card-body">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>N° Commande</th>
+                  <th>Date</th>
+                  <th>Client</th>
+                  <th>Produits</th>
+                  <th>Total</th>
+                  <th>Paiement</th>
+                  <th>Statut</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="orders-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== STOCKS ===== -->
+      <section id="section-inventory" class="admin-section">
+        <div class="alert alert-warning" id="low-stock-alert" style="display:none">
+          <span class="alert-icon">⚠️</span>
+          <div>Certains produits ont un stock inférieur au seuil d'alerte. Pensez à renouveler votre stock.</div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Inventaire — 12 références</div>
+              <div class="card-subtitle">Modifiez les quantités directement dans le tableau, sauvegarde automatique</div>
+            </div>
+          </div>
+          <div class="card-body">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Produit</th>
+                  <th>Catégorie</th>
+                  <th>Prix vente</th>
+                  <th>Stock actuel</th>
+                  <th>Seuil alerte</th>
+                  <th>Statut</th>
+                </tr>
+              </thead>
+              <tbody id="inventory-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== FOURNISSEURS ===== -->
+      <section id="section-suppliers" class="admin-section">
+        <div style="display:flex;justify-content:flex-end;margin-bottom:16px;">
+          <button class="btn btn-primary" onclick="toggleSupplierForm()">➕ Nouvelle commande fournisseur</button>
+        </div>
+
+        <div class="supplier-form" id="supplier-form">
+          <div class="card-title" style="margin-bottom:16px;">📋 Nouvelle commande fournisseur</div>
+          <form onsubmit="submitSupplierOrder(event)">
+            <div class="form-row">
+              <div class="form-group">
+                <label>Fournisseur *</label>
+                <select name="supplier" required>
+                  <option value="">— Choisir —</option>
+                  <option>CycloPro Distribution</option>
+                  <option>VéloImport SAS</option>
+                  <option>KidsBike Europe</option>
+                  <option>SportCycle France</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Produit *</label>
+                <select name="product" required>
+                  <option value="">— Choisir —</option>
+                  <option>Mini Bolide</option>
+                  <option>Primo 12"</option>
+                  <option>Spark 14"</option>
+                  <option>Junior 16"</option>
+                  <option>Trail 18"</option>
+                  <option>Explorer 20"</option>
+                  <option>Avanti 24"</option>
+                  <option>Street Kid BMX</option>
+                  <option>Dirt Pro BMX</option>
+                  <option>E-Spark 20"</option>
+                  <option>Rainbow Girl</option>
+                  <option>Zoom Draisienne</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Quantité *</label>
+                <input type="number" name="qty" min="1" value="10" required>
+              </div>
+              <div class="form-group">
+                <label>Prix unitaire fournisseur (€) *</label>
+                <input type="number" name="unitCost" min="0" step="0.01" placeholder="ex: 67.50" required>
+              </div>
+            </div>
+            <div style="display:flex;gap:10px;margin-top:8px;">
+              <button type="submit" class="btn btn-primary">✅ Valider la commande</button>
+              <button type="button" class="btn btn-outline" onclick="toggleSupplierForm()">Annuler</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Historique commandes fournisseurs</div>
+              <div class="card-subtitle">Toutes les commandes passées auprès de vos fournisseurs</div>
+            </div>
+          </div>
+          <div class="card-body">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>N° Commande</th>
+                  <th>Date</th>
+                  <th>Fournisseur</th>
+                  <th>Produit(s)</th>
+                  <th>Total</th>
+                  <th>Statut</th>
+                  <th>Commande client</th>
+                </tr>
+              </thead>
+              <tbody id="sup-orders-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== MESSAGES ===== -->
+      <section id="section-contacts" class="admin-section">
+        <div class="messages-layout">
+
+          <!-- Liste des messages -->
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <div class="card-title">Boîte de réception</div>
+                <div class="card-subtitle" id="msg-count-label"></div>
+              </div>
+            </div>
+            <div class="message-list" id="message-list"></div>
+          </div>
+
+          <!-- Détail du message -->
+          <div class="message-detail-panel" id="message-detail-panel">
+            <div class="message-detail-empty">
+              <div class="message-detail-empty-icon">✉️</div>
+              <div style="font-weight:600;font-size:.9rem;">Sélectionnez un message</div>
+              <div style="font-size:.8rem;">Cliquez sur un message pour le lire</div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ===== PAIEMENTS ===== -->
+      <section id="section-payments" class="admin-section">
+        <div class="payment-summary">
+          <div class="payment-summary-card">
+            <div class="payment-summary-label">CA encaissé</div>
+            <div class="payment-summary-value" id="pay-summary-total">—</div>
+          </div>
+          <div class="payment-summary-card green">
+            <div class="payment-summary-label">Transactions complétées</div>
+            <div class="payment-summary-value" id="pay-summary-count">—</div>
+          </div>
+          <div class="payment-summary-card red">
+            <div class="payment-summary-label">Remboursements</div>
+            <div class="payment-summary-value" id="pay-summary-refund">—</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Historique des paiements</div>
+              <div class="card-subtitle">Cliquez sur un numéro de commande pour voir le détail</div>
+            </div>
+            <div class="filter-bar">
+              <button class="filter-btn active" data-filter="all"   onclick="renderPayments('all')">Tous</button>
+              <button class="filter-btn" data-filter="completed"    onclick="renderPayments('completed')">Complétés</button>
+              <button class="filter-btn" data-filter="refunded"     onclick="renderPayments('refunded')">Remboursés</button>
+            </div>
+          </div>
+          <div class="card-body">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>N° Paiement</th>
+                  <th>Date</th>
+                  <th>Commande</th>
+                  <th>Client</th>
+                  <th>Montant</th>
+                  <th>Méthode</th>
+                  <th>Statut</th>
+                </tr>
+              </thead>
+              <tbody id="payments-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== FACTURES ===== -->
+      <section id="section-invoices" class="admin-section">
+
+        <div class="inv-header-bar">
+          <div>
+            <div class="card-title">Archive des factures</div>
+            <div class="card-subtitle">Factures générées automatiquement à chaque commande confirmée</div>
+          </div>
+          <div class="filter-bar">
+            <button class="filter-btn active" data-period="all"   onclick="renderInvoices('all')">Toutes</button>
+            <button class="filter-btn" data-period="today"        onclick="renderInvoices('today')">Aujourd'hui</button>
+            <button class="filter-btn" data-period="week"         onclick="renderInvoices('week')">Cette semaine</button>
+            <button class="filter-btn" data-period="month"        onclick="renderInvoices('month')">Ce mois</button>
+          </div>
+        </div>
+
+        <div class="alert alert-info">
+          <span class="alert-icon">ℹ️</span>
+          <div>Cliquez sur <strong>Voir / Imprimer</strong> pour ouvrir la facture dans un nouvel onglet — directement imprimable en PDF depuis votre navigateur.</div>
+        </div>
+
+        <div id="invoices-container"></div>
+      </section>
+
+    </div><!-- /admin-content -->
+  </main>
+</div>
+
+<!-- ===== MODAL COMMANDE ===== -->
+<div class="modal-overlay" id="order-modal" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title" id="modal-title">Détail commande</div>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body" id="modal-body"></div>
+    <div class="modal-footer">
+      <button class="btn btn-outline btn-sm" onclick="closeModal()">Fermer</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="admin-toast" id="admin-toast"></div>
+
+<script src="admin.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', adminInit);
+</script>
+</body>
+</html>

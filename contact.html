@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — VéloKid</title>
+  <meta name="description" content="Contactez l'équipe VéloKid pour toute question sur nos vélos, une commande ou un conseil personnalisé.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <nav class="navbar scrolled" id="navbar">
+    <div class="navbar-inner">
+      <a href="index.html" class="logo">
+        <svg class="logo-svg" viewBox="0 0 52 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="11" cy="28" r="8.5" stroke="#FF6B35" stroke-width="2.5"/>
+          <circle cx="11" cy="28" r="2.5" fill="#FF6B35"/>
+          <circle cx="41" cy="28" r="8.5" stroke="#FF6B35" stroke-width="2.5"/>
+          <circle cx="41" cy="28" r="2.5" fill="#FF6B35"/>
+          <line x1="11" y1="28" x2="24" y2="28" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="24" y1="28" x2="21" y2="11" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="21" y1="11" x2="35" y2="14" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="24" y1="28" x2="35" y2="14" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="35" y1="14" x2="41" y2="28" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="35" y1="14" x2="35" y2="8" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="31.5" y1="8" x2="39" y2="8" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="17.5" y1="10" x2="25" y2="10" stroke="#FF6B35" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="24" cy="28" r="3" fill="#FF6B35"/>
+        </svg>
+        Vélo<span>Kid</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html"           class="nav-link" data-i18n="nav_home">Accueil</a></li>
+        <li><a href="boutique.html"        class="nav-link" data-i18n="nav_shop">Boutique</a></li>
+        <li><a href="qui-sommes-nous.html" class="nav-link" data-i18n="nav_about">Qui sommes-nous</a></li>
+        <li><a href="contact.html"         class="nav-link active" data-i18n="nav_contact">Contact</a></li>
+      </ul>
+      <div style="display:flex;align-items:center;gap:8px">
+        <button class="lang-toggle" id="langToggle" onclick="toggleLanguage()">🇬🇧 EN</button>
+        <button class="cart-trigger" onclick="showCartDrawer()">🛒<span class="cart-badge">0</span></button>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+  <nav class="mobile-nav" id="mobileNav">
+    <a href="index.html"           class="nav-link" data-i18n="nav_home">🏠 Accueil</a>
+    <a href="boutique.html"        class="nav-link" data-i18n="nav_shop">🚲 Boutique</a>
+    <a href="qui-sommes-nous.html" class="nav-link" data-i18n="nav_about">👥 Qui sommes-nous</a>
+    <a href="contact.html"         class="nav-link active" data-i18n="nav_contact">✉️ Contact</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="page-hero">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="index.html">Accueil</a> › <span>Contact</span>
+      </div>
+      <h1 data-i18n="ph_contact_title">Contactez-nous</h1>
+      <p data-i18n="ph_contact_desc">Une question, un conseil d'achat, un problème de commande ? Notre équipe vous répond en moins de 24h.</p>
+    </div>
+  </section>
+
+  <!-- FAQ RAPIDE -->
+  <section class="section features-bg section-sm">
+    <div class="container">
+      <div class="text-center" style="margin-bottom:40px">
+        <span class="section-label" data-i18n="faq_label">❓ Questions fréquentes</span>
+        <h2 class="section-title" data-i18n="faq_title">Avant de nous écrire…</h2>
+      </div>
+      <div class="grid-3">
+        <div class="feature-card">
+          <div class="feature-icon orange">🚚</div>
+          <h3 data-i18n="faq1_title">Délai de livraison ?</h3>
+          <p data-i18n="faq1_desc">2 à 4 jours ouvrés en France métropolitaine. Vous recevez un email avec le numéro de suivi dès l'expédition.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon blue">↩️</div>
+          <h3 data-i18n="faq2_title">Comment retourner ?</h3>
+          <p data-i18n="faq2_desc">Vous avez 30 jours pour retourner un produit. Les frais de retour sont offerts. Contactez-nous par email.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon yellow">📏</div>
+          <h3 data-i18n="faq3_title">Quelle taille choisir ?</h3>
+          <p data-i18n="faq3_desc">Consultez notre guide des tailles sur la page boutique, ou contactez-nous avec l'âge et la taille de votre enfant.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon green">🔧</div>
+          <h3 data-i18n="faq4_title">Montage inclus ?</h3>
+          <p data-i18n="faq4_desc">Chaque vélo est livré avec une notice de montage illustrée. Le montage prend environ 15–30 minutes.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon orange">🛡️</div>
+          <h3 data-i18n="faq5_title">Garantie produit ?</h3>
+          <p data-i18n="faq5_desc">Tous nos vélos bénéficient de 2 ans de garantie légale + 1 an de garantie commerciale VéloKid sur le cadre.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon blue">💳</div>
+          <h3 data-i18n="faq6_title">Paiement sécurisé ?</h3>
+          <p data-i18n="faq6_desc">Oui, 100 % sécurisé via Stripe (SSL + 3D Secure). Carte bancaire, PayPal et virement acceptés.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORMULAIRE + INFOS -->
+  <section class="section">
+    <div class="container">
+      <div class="contact-grid">
+
+        <!-- Infos de contact -->
+        <div>
+          <span class="section-label" data-i18n="ct_join_label">📬 Nous joindre</span>
+          <h2 style="margin-bottom:32px" data-i18n="ct_join_title">On est là pour vous aider</h2>
+          <div class="contact-info-cards">
+            <div class="contact-info-card">
+              <div class="contact-icon">📍</div>
+              <div>
+                <h4 data-i18n="ct_show_title">Notre showroom</h4>
+                <p>12 rue des Cyclistes<br>75011 Paris, France<br><small style="color:var(--gray)" data-i18n="ct_show_note">Visite sur rendez-vous uniquement</small></p>
+              </div>
+            </div>
+            <div class="contact-info-card">
+              <div class="contact-icon">📞</div>
+              <div>
+                <h4>Téléphone</h4>
+                <p>01 23 45 67 89<br><small style="color:var(--gray)" data-i18n="ct_phone_hours">Lun–Ven : 9h–18h · Sam : 10h–16h</small></p>
+              </div>
+            </div>
+            <div class="contact-info-card">
+              <div class="contact-icon">✉️</div>
+              <div>
+                <h4>Email</h4>
+                <p>bonjour@velokid.fr<br><small style="color:var(--gray)" data-i18n="ct_email_note">Réponse sous 24h (jours ouvrés)</small></p>
+              </div>
+            </div>
+            <div class="contact-info-card">
+              <div class="contact-icon">💬</div>
+              <div>
+                <h4 data-i18n="ct_chat_title">Chat en direct</h4>
+                <p><span data-i18n="ct_chat_avail">Disponible sur le site</span><br><small style="color:var(--gray)" data-i18n="ct_chat_hours">Lun–Ven : 9h–17h</small></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Réseaux sociaux -->
+          <div style="margin-top:32px">
+            <h4 style="margin-bottom:16px;color:var(--dark)" data-i18n="ct_follow">Suivez-nous</h4>
+            <div style="display:flex;gap:12px;flex-wrap:wrap">
+              <a href="#" class="btn btn-outline btn-sm">📘 Facebook</a>
+              <a href="#" class="btn btn-outline btn-sm">📷 Instagram</a>
+              <a href="#" class="btn btn-outline btn-sm">▶ YouTube</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Formulaire -->
+        <div class="contact-form fade-up delay-2">
+          <h3 style="margin-bottom:8px;color:var(--dark)" data-i18n="form_title">Envoyez-nous un message</h3>
+          <p style="margin-bottom:28px;font-size:.85rem" data-i18n="form_desc">Nous répondons à toutes les demandes sous 24h en jours ouvrés.</p>
+
+          <form id="contactForm" onsubmit="submitForm(event)">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="prenom">Prénom *</label>
+                <input type="text" id="prenom" name="prenom" placeholder="Marie" required>
+              </div>
+              <div class="form-group">
+                <label for="nom">Nom *</label>
+                <input type="text" id="nom" name="nom" placeholder="Dupont" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="email">Email *</label>
+              <input type="email" id="email" name="email" placeholder="marie@exemple.fr" required>
+            </div>
+            <div class="form-group">
+              <label for="telephone">Téléphone</label>
+              <input type="tel" id="telephone" name="telephone" placeholder="06 12 34 56 78">
+            </div>
+            <div class="form-group">
+              <label for="sujet">Sujet *</label>
+              <select id="sujet" name="sujet" required>
+                <option value="" disabled selected>Choisir un sujet…</option>
+                <option value="conseil">Conseil d'achat</option>
+                <option value="commande">Suivi de commande</option>
+                <option value="retour">Retour / échange</option>
+                <option value="garantie">Garantie / SAV</option>
+                <option value="autre">Autre</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="message">Votre message *</label>
+              <textarea id="message" name="message" placeholder="Décrivez votre demande en quelques mots…" required></textarea>
+            </div>
+            <div class="form-group" style="flex-direction:row;align-items:center;gap:10px">
+              <input type="checkbox" id="rgpd" name="rgpd" required style="width:16px;height:16px;accent-color:var(--primary)">
+              <label for="rgpd" style="font-size:.82rem;color:var(--gray);font-weight:400">J'accepte que mes données soient utilisées pour traiter ma demande conformément à la <a href="cgv.html" style="color:var(--primary)">politique de confidentialité</a>.</label>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center" data-i18n="form_submit">
+              Envoyer le message ✉️
+            </button>
+          </form>
+
+          <!-- Confirmation -->
+          <div id="formSuccess" style="display:none;margin-top:24px;background:rgba(6,214,160,.1);border:2px solid var(--success);border-radius:var(--radius);padding:20px;text-align:center">
+            <div style="font-size:2rem">✅</div>
+            <h4 style="color:var(--dark);margin:8px 0 4px">Message envoyé !</h4>
+            <p style="font-size:.85rem">Merci pour votre message. Nous vous répondrons sous 24h.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="logo"><svg class="logo-svg" viewBox="0 0 52 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="11" cy="28" r="8.5" stroke="#FF6B35" stroke-width="2.5"/>
+          <circle cx="11" cy="28" r="2.5" fill="#FF6B35"/>
+          <circle cx="41" cy="28" r="8.5" stroke="#FF6B35" stroke-width="2.5"/>
+          <circle cx="41" cy="28" r="2.5" fill="#FF6B35"/>
+          <line x1="11" y1="28" x2="24" y2="28" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="24" y1="28" x2="21" y2="11" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="21" y1="11" x2="35" y2="14" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="24" y1="28" x2="35" y2="14" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="35" y1="14" x2="41" y2="28" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="35" y1="14" x2="35" y2="8" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="31.5" y1="8" x2="39" y2="8" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="17.5" y1="10" x2="25" y2="10" stroke="#FF6B35" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="24" cy="28" r="3" fill="#FF6B35"/>
+        </svg>Vélo<span>Kid</span></a>
+          <p data-i18n="footer_desc">Spécialiste du vélo enfant depuis 2015.</p>
+          <div class="footer-socials">
+            <button class="social-btn">f</button>
+            <button class="social-btn">📷</button>
+            <button class="social-btn">♪</button>
+            <button class="social-btn">▶</button>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4 data-i18n="footer_shop">Boutique</h4>
+          <ul class="footer-links">
+            <li><a href="boutique.html" data-i18n="footer_all">Tous les vélos</a></li>
+            <li><a href="boutique.html" data-i18n="footer_drais">Draisiennes</a></li>
+            <li><a href="boutique.html" data-i18n="footer_bmx">BMX & Freestyle</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4 data-i18n="footer_info">Informations</h4>
+          <ul class="footer-links">
+            <li><a href="qui-sommes-nous.html" data-i18n="footer_about">Qui sommes-nous</a></li>
+            <li><a href="contact.html" data-i18n="nav_contact">Contact</a></li>
+            <li><a href="suivi-commande.html" data-i18n="footer_track">Suivi commande</a></li>
+            <li><a href="cgv.html" data-i18n="footer_cgv">CGV</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4 data-i18n="footer_contact">Contact</h4>
+          <ul class="footer-links">
+            <li>📍 12 rue des Cyclistes, 75011 Paris</li>
+            <li>📞 01 23 45 67 89</li>
+            <li>✉️ bonjour@velokid.fr</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p data-i18n="footer_copy">© 2025 VéloKid. Tous droits réservés.</p>
+        <div class="footer-bottom-links">
+          <a href="cgv.html" data-i18n="footer_cgv">CGV</a>
+          <a href="cgv.html" data-i18n="footer_legal">Mentions légales</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="cart-toast" id="cartToast">
+    <span class="cart-toast-icon">✅</span>
+    <span id="cartToastMsg">Produit ajouté au panier !</span>
+  </div>
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <aside class="cart-drawer" id="cartDrawer">
+    <div class="cart-drawer-header">
+      <h3 data-i18n="cart_drawer_title">Panier</h3>
+      <button class="cart-drawer-close" onclick="closeCartDrawer()">✕</button>
+    </div>
+    <div class="cart-drawer-body"></div>
+    <div class="cart-drawer-footer"></div>
+  </aside>
+  <script src="translations.js"></script>
+  <script src="cart.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

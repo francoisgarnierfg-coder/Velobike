@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VéloKid — Vélos pour enfants | Qualité & Sécurité</title>
+  <meta name="description" content="Découvrez notre sélection de vélos pour enfants. Draisiennes, vélos 12 à 24 pouces, BMX — tout pour le bonheur de vos enfants à deux roues.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ==================== NAVIGATION ==================== -->
+  <nav class="navbar" id="navbar">
+    <div class="navbar-inner">
+      <a href="index.html" class="logo">
+        <svg class="logo-svg" viewBox="0 0 52 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="11" cy="28" r="8.5" stroke="#FF6B35" stroke-width="2.5"/>
+          <circle cx="11" cy="28" r="2.5" fill="#FF6B35"/>
+          <circle cx="41" cy="28" r="8.5" stroke="#FF6B35" stroke-width="2.5"/>
+          <circle cx="41" cy="28" r="2.5" fill="#FF6B35"/>
+          <line x1="11" y1="28" x2="24" y2="28" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="24" y1="28" x2="21" y2="11" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="21" y1="11" x2="35" y2="14" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="24" y1="28" x2="35" y2="14" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="35" y1="14" x2="41" y2="28" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="35" y1="14" x2="35" y2="8" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="31.5" y1="8" x2="39" y2="8" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="17.5" y1="10" x2="25" y2="10" stroke="#FF6B35" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="24" cy="28" r="3" fill="#FF6B35"/>
+        </svg>
+        Vélo<span>Kid</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html"           class="nav-link active" data-i18n="nav_home">Accueil</a></li>
+        <li><a href="boutique.html"        class="nav-link"        data-i18n="nav_shop">Boutique</a></li>
+        <li><a href="qui-sommes-nous.html" class="nav-link"        data-i18n="nav_about">Qui sommes-nous</a></li>
+        <li><a href="contact.html"         class="nav-link"        data-i18n="nav_contact">Contact</a></li>
+      </ul>
+      <div style="display:flex;align-items:center;gap:8px">
+        <button class="lang-toggle" id="langToggle" onclick="toggleLanguage()">🇬🇧 EN</button>
+        <button class="cart-trigger" onclick="showCartDrawer()" title="Panier">
+          🛒<span class="cart-badge">0</span>
+        </button>
+        <a href="boutique.html" class="btn btn-primary btn-sm nav-cta" data-i18n="nav_cta">Voir les vélos ›</a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+  <nav class="mobile-nav" id="mobileNav">
+    <a href="index.html"           class="nav-link active" data-i18n="nav_home">🏠 Accueil</a>
+    <a href="boutique.html"        class="nav-link"        data-i18n="nav_shop">🚲 Boutique</a>
+    <a href="qui-sommes-nous.html" class="nav-link"        data-i18n="nav_about">👥 Qui sommes-nous</a>
+    <a href="contact.html"         class="nav-link"        data-i18n="nav_contact">✉️ Contact</a>
+    <div style="display:flex;gap:10px;margin-top:8px">
+      <button class="lang-toggle" onclick="toggleLanguage()" id="langToggleMobile">🇬🇧 EN</button>
+      <a href="boutique.html" class="btn btn-primary" data-i18n="nav_cta">Voir les vélos ›</a>
+    </div>
+  </nav>
+
+  <!-- ==================== HERO ==================== -->
+  <section class="section">
+    <div class="container">
+      <div class="hero">
+        <div class="hero-content fade-up">
+          <div class="hero-badge">
+            <span class="badge-dot"></span>
+            <span data-i18n="hero_badge">Livraison gratuite dès 99 €</span>
+          </div>
+          <h1 class="hero-title" data-i18n="hero_title">
+            Le vélo parfait pour chaque <span class="highlight">petit aventurier</span>
+          </h1>
+          <p class="hero-desc" data-i18n="hero_desc">
+            Des draisiennes aux vélos 20 pouces, nous sélectionnons les meilleures montures pour accompagner vos enfants dans leurs premières pédalées, en toute sécurité et avec le sourire.
+          </p>
+          <div class="hero-actions">
+            <a href="boutique.html" class="btn btn-primary btn-lg" data-i18n="hero_cta1">Découvrir la boutique ›</a>
+            <a href="qui-sommes-nous.html" class="btn btn-outline" data-i18n="hero_cta2">Notre histoire</a>
+          </div>
+          <div class="hero-stats">
+            <div>
+              <div class="stat-value" data-i18n="stat1_val">+500</div>
+              <div class="stat-label" data-i18n="stat1_lbl">Familles satisfaites</div>
+            </div>
+            <div>
+              <div class="stat-value" data-i18n="stat2_val">12</div>
+              <div class="stat-label" data-i18n="stat2_lbl">Modèles disponibles</div>
+            </div>
+            <div>
+              <div class="stat-value" data-i18n="stat3_val">5★</div>
+              <div class="stat-label" data-i18n="stat3_lbl">Note moyenne</div>
+            </div>
+          </div>
+        </div>
+        <div class="hero-visual fade-up delay-2">
+          <div class="hero-img-wrap">
+            <img src="images/hero.jpg" alt="Enfant souriant sur son vélo VéloKid" loading="eager">
+          </div>
+          <div class="hero-badge-float top-left">
+            <div class="float-icon">🏆</div>
+            <div>
+              <div class="float-label" data-i18n="cert_label">Certifié</div>
+              <div class="float-val" data-i18n="cert_val">Norme EN 14765</div>
+            </div>
+          </div>
+          <div class="hero-badge-float bottom-right">
+            <div class="float-icon">🚚</div>
+            <div>
+              <div class="float-label" data-i18n="del_label">Livraison</div>
+              <div class="float-val" data-i18n="del_val">2 à 4 jours</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== AVANTAGES ==================== -->
+  <section class="section features-bg">
+    <div class="container text-center">
+      <span class="section-label fade-up" data-i18n="feat_label">✦ Pourquoi nous choisir</span>
+      <h2 class="section-title fade-up delay-1" data-i18n="feat_title">Conçu pour les parents exigeants</h2>
+      <p class="section-desc fade-up delay-2" data-i18n="feat_desc">Chaque vélo est soigneusement sélectionné pour allier sécurité, durabilité et plaisir de rouler.</p>
+      <div class="grid-4">
+        <div class="feature-card fade-up delay-1">
+          <div class="feature-icon orange">🛡️</div>
+          <h3 data-i18n="feat1_title">Sécurité certifiée</h3>
+          <p data-i18n="feat1_desc">Tous nos vélos respectent la norme européenne EN 14765. Freins fiables, guidons rembourrés, pédales antidérapantes.</p>
+        </div>
+        <div class="feature-card fade-up delay-2">
+          <div class="feature-icon blue">⚙️</div>
+          <h3 data-i18n="feat2_title">Qualité premium</h3>
+          <p data-i18n="feat2_desc">Cadres en acier haute résistance, pneus gonflables, selles réglables. Conçus pour durer plusieurs saisons.</p>
+        </div>
+        <div class="feature-card fade-up delay-3">
+          <div class="feature-icon yellow">📏</div>
+          <h3 data-i18n="feat3_title">Tailles adaptées</h3>
+          <p data-i18n="feat3_desc">De 18 mois à 12 ans, nous avons le modèle idéal pour chaque stade de développement de votre enfant.</p>
+        </div>
+        <div class="feature-card fade-up delay-4">
+          <div class="feature-icon green">🚚</div>
+          <h3 data-i18n="feat4_title">Livraison offerte</h3>
+          <p data-i18n="feat4_desc">Livraison gratuite en France métropolitaine dès 99 €. Montage facile inclus avec chaque commande.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== PRODUITS VEDETTES ==================== -->
+  <section class="section">
+    <div class="container">
+      <div class="text-center">
+        <span class="section-label fade-up" data-i18n="prod_label">🚲 Nos bestsellers</span>
+        <h2 class="section-title fade-up delay-1" data-i18n="prod_title">Les vélos préférés des kids</h2>
+        <p class="section-desc fade-up delay-2" data-i18n="prod_desc">Sélectionnés et testés par nos équipes, ces modèles ont conquis des centaines de familles.</p>
+      </div>
+      <div class="grid-4">
+        <div class="product-card fade-up delay-1">
+          <div class="product-img">
+            <img src="images/bike1.jpg" alt="Draisienne Mini Bolide" loading="lazy">
+            <span class="product-badge new" data-i18n="badge_new">Nouveau</span>
+            <button class="product-wishlist" title="Ajouter aux favoris">♡</button>
+          </div>
+          <div class="product-body">
+            <div class="product-age" data-i18n="age_drais_1">1–3 ans · Draisienne</div>
+            <div class="product-name">Mini Bolide</div>
+            <p class="product-desc" data-i18n="desc_mini">Légère (2,9 kg), selle ultra-réglable, idéale pour les premiers équilibres.</p>
+            <div class="product-footer">
+              <div><div class="product-price">89 €</div></div>
+              <button class="add-to-cart" onclick="addToCart('Mini Bolide',89,'images/bike1.jpg','mini-bolide','1–3 ans · Draisienne','draisienne')" data-i18n="btn_add">🛒 Ajouter</button>
+            </div>
+          </div>
+        </div>
+        <div class="product-card fade-up delay-2">
+          <div class="product-img">
+            <img src="images/bike2.jpg" alt="Vélo Primo 12 pouces" loading="lazy">
+            <span class="product-badge" data-i18n="badge_best">Bestseller</span>
+            <button class="product-wishlist" title="Ajouter aux favoris">♡</button>
+          </div>
+          <div class="product-body">
+            <div class="product-age" data-i18n="age_12_2">2–4 ans · 12 pouces</div>
+            <div class="product-name">Primo 12"</div>
+            <p class="product-desc" data-i18n="desc_primo">Premier vélo avec pédales, roues stabilisatrices amovibles, frein avant.</p>
+            <div class="product-footer">
+              <div><span class="product-price-old">169 €</span><div class="product-price">149 €</div></div>
+              <button class="add-to-cart" onclick="addToCart('Primo 12&quot;',149,'images/bike2.jpg','primo-12','2–4 ans · 12 pouces','12')" data-i18n="btn_add">🛒 Ajouter</button>
+            </div>
+          </div>
+        </div>
+        <div class="product-card fade-up delay-3">
+          <div class="product-img">
+            <img src="images/bike5.jpg" alt="Vélo Explorer 20 pouces" loading="lazy">
+            <span class="product-badge" data-i18n="badge_pop">Populaire</span>
+            <button class="product-wishlist" title="Ajouter aux favoris">♡</button>
+          </div>
+          <div class="product-body">
+            <div class="product-age" data-i18n="age_20_6">6–9 ans · 20 pouces</div>
+            <div class="product-name">Explorer 20"</div>
+            <p class="product-desc" data-i18n="desc_exp20">6 vitesses Shimano, freins V-brake, robuste pour la ville et les chemins.</p>
+            <div class="product-footer">
+              <div><div class="product-price">229 €</div></div>
+              <button class="add-to-cart" onclick="addToCart('Explorer 20&quot;',229,'images/bike5.jpg','explorer-20','6–9 ans · 20 pouces','20')" data-i18n="btn_add">🛒 Ajouter</button>
+            </div>
+          </div>
+        </div>
+        <div class="product-card fade-up delay-4">
+          <div class="product-img">
+            <img src="images/bike6.jpg" alt="BMX Street Kid" loading="lazy">
+            <span class="product-badge sale">−10 %</span>
+            <button class="product-wishlist" title="Ajouter aux favoris">♡</button>
+          </div>
+          <div class="product-body">
+            <div class="product-age" data-i18n="age_bmx">8+ ans · BMX</div>
+            <div class="product-name">Street Kid BMX</div>
+            <p class="product-desc" data-i18n="desc_streetbmx">BMX acrobatique, guidon 4 pièces, pneus larges, rotor complet.</p>
+            <div class="product-footer">
+              <div><span class="product-price-old">219 €</span><div class="product-price">199 €</div></div>
+              <button class="add-to-cart" onclick="addToCart('Street Kid BMX',199,'images/bike6.jpg','street-kid-bmx','8+ ans · BMX','bmx')" data-i18n="btn_add">🛒 Ajouter</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-center" style="margin-top:48px">
+        <a href="boutique.html" class="btn btn-outline btn-lg" data-i18n="prod_see_all">Voir tous les modèles →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== TÉMOIGNAGES ==================== -->
+  <section class="section testimonials-bg">
+    <div class="container text-center">
+      <span class="section-label fade-up" data-i18n="review_label">⭐ Avis clients</span>
+      <h2 class="section-title fade-up delay-1" data-i18n="review_title">Ils ont adopté VéloKid</h2>
+      <p class="section-desc fade-up delay-2" style="color:rgba(255,255,255,.7)" data-i18n="review_desc">Plus de 500 familles nous font confiance. Découvrez leurs témoignages.</p>
+      <div class="grid-3" style="margin-top:40px">
+        <div class="testimonial-card fade-up delay-1">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text" data-i18n="rev1_text">"La draisienne Mini Bolide est parfaite pour notre fils de 2 ans. Légère, robuste, et il adore sa couleur. Livraison en 3 jours, montage en 10 minutes !"</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">S</div>
+            <div>
+              <div class="author-name">Sophie M.</div>
+              <div class="author-info" data-i18n="rev1_info">Maman de Théo, 2 ans · Lyon</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card fade-up delay-2">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text" data-i18n="rev2_text">"L'Explorer 20" est un excellent rapport qualité-prix. Ma fille de 7 ans est ravie, les freins sont efficaces et le vélo tient bien la route. Je recommande !"</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">P</div>
+            <div>
+              <div class="author-name">Pierre D.</div>
+              <div class="author-info" data-i18n="rev2_info">Papa de Lucie, 7 ans · Bordeaux</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card fade-up delay-3">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text" data-i18n="rev3_text">"Service client au top ! J'avais une question sur la taille, ils m'ont répondu en moins de 2h. Le vélo est arrivé bien emballé. Mon fils ne veut plus descendre !"</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">M</div>
+            <div>
+              <div class="author-name">Marie L.</div>
+              <div class="author-info" data-i18n="rev3_info">Maman de Lucas, 5 ans · Paris</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CTA BANNER ==================== -->
+  <section class="section">
+    <div class="container">
+      <div class="cta-banner fade-up">
+        <h2 data-i18n="cta_title">Prêt à offrir la liberté à votre enfant ?</h2>
+        <p data-i18n="cta_desc">Profitez de la livraison gratuite dès 99 € et du retour facile sous 30 jours.</p>
+        <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+          <a href="boutique.html" class="btn btn-white btn-lg" data-i18n="cta_btn1">Voir les vélos ›</a>
+          <a href="contact.html"  class="btn btn-outline btn-lg" style="border-color:white;color:white" data-i18n="cta_btn2">Nous contacter</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="logo"><svg class="logo-svg" viewBox="0 0 52 38" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="28" r="8.5" stroke="#FF6B35" stroke-width="2.5"/><circle cx="11" cy="28" r="2.5" fill="#FF6B35"/><circle cx="41" cy="28" r="8.5" stroke="#FF6B35" stroke-width="2.5"/><circle cx="41" cy="28" r="2.5" fill="#FF6B35"/><line x1="11" y1="28" x2="24" y2="28" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/><line x1="24" y1="28" x2="21" y2="11" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/><line x1="21" y1="11" x2="35" y2="14" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/><line x1="24" y1="28" x2="35" y2="14" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/><line x1="35" y1="14" x2="41" y2="28" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/><line x1="35" y1="14" x2="35" y2="8" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/><line x1="31.5" y1="8" x2="39" y2="8" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/><line x1="17.5" y1="10" x2="25" y2="10" stroke="#FF6B35" stroke-width="3" stroke-linecap="round"/><circle cx="24" cy="28" r="3" fill="#FF6B35"/></svg>Vélo<span>Kid</span>
+          </a>
+          <p data-i18n="footer_desc">Spécialiste du vélo enfant depuis 2015. Nous croyons que chaque enfant mérite un vélo sûr, beau et adapté à sa taille.</p>
+          <div class="footer-socials">
+            <button class="social-btn" title="Facebook">f</button>
+            <button class="social-btn" title="Instagram">📷</button>
+            <button class="social-btn" title="TikTok">♪</button>
+            <button class="social-btn" title="YouTube">▶</button>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4 data-i18n="footer_shop">Boutique</h4>
+          <ul class="footer-links">
+            <li><a href="boutique.html" data-i18n="footer_all">Tous les vélos</a></li>
+            <li><a href="boutique.html" data-i18n="footer_drais">Draisiennes</a></li>
+            <li><a href="boutique.html" data-i18n="footer_12">12 & 14 pouces</a></li>
+            <li><a href="boutique.html" data-i18n="footer_16">16 & 18 pouces</a></li>
+            <li><a href="boutique.html" data-i18n="footer_20">20 & 24 pouces</a></li>
+            <li><a href="boutique.html" data-i18n="footer_bmx">BMX & Freestyle</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4 data-i18n="footer_info">Informations</h4>
+          <ul class="footer-links">
+            <li><a href="qui-sommes-nous.html" data-i18n="footer_about">Qui sommes-nous</a></li>
+            <li><a href="contact.html" data-i18n="nav_contact">Contact</a></li>
+            <li><a href="suivi-commande.html" data-i18n="footer_track">📍 Suivi commande</a></li>
+            <li><a href="cgv.html" data-i18n="footer_cgv">CGV</a></li>
+            <li><a href="cgv.html" data-i18n="footer_return">Politique de retour</a></li>
+            <li><a href="cgv.html" data-i18n="footer_legal">Mentions légales</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4 data-i18n="footer_contact">Contact</h4>
+          <ul class="footer-links">
+            <li>📍 12 rue des Cyclistes<br>75011 Paris</li>
+            <li>📞 01 23 45 67 89</li>
+            <li>✉️ bonjour@velokid.fr</li>
+            <li>🕐 <span data-i18n="footer_hours">Lun–Sam : 9h–18h</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p data-i18n="footer_copy">© 2025 VéloKid. Tous droits réservés.</p>
+        <div class="footer-bottom-links">
+          <a href="cgv.html" data-i18n="footer_cgv">CGV</a>
+          <a href="cgv.html" data-i18n="footer_legal">Mentions légales</a>
+          <a href="cgv.html" data-i18n="footer_cookies">Cookies</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Cart Overlay + Drawer -->
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <aside class="cart-drawer" id="cartDrawer">
+    <div class="cart-drawer-header">
+      <h3 data-i18n="cart_drawer_title">Panier</h3>
+      <button class="cart-drawer-close" onclick="closeCartDrawer()">✕</button>
+    </div>
+    <div class="cart-drawer-body"></div>
+    <div class="cart-drawer-footer"></div>
+  </aside>
+
+  <div class="cart-toast" id="cartToast">
+    <span class="cart-toast-icon">✅</span>
+    <span id="cartToastMsg">Produit ajouté au panier !</span>
+  </div>
+
+  <script src="translations.js"></script>
+  <script src="cart.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

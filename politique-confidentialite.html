@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Politique de confidentialité — VéloKid</title>
+  <meta name="description" content="Politique de confidentialité et gestion des cookies de VéloKid — RGPD, données personnelles, droits des utilisateurs.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <nav class="navbar scrolled" id="navbar">
+    <div class="navbar-inner">
+      <a href="index.html" class="logo">
+        <svg class="logo-svg" viewBox="0 0 52 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="11" cy="28" r="8.5" stroke="#FF6B35" stroke-width="2.5"/>
+          <circle cx="11" cy="28" r="2.5" fill="#FF6B35"/>
+          <circle cx="41" cy="28" r="8.5" stroke="#FF6B35" stroke-width="2.5"/>
+          <circle cx="41" cy="28" r="2.5" fill="#FF6B35"/>
+          <line x1="11" y1="28" x2="24" y2="28" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="24" y1="28" x2="21" y2="11" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="21" y1="11" x2="35" y2="14" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="24" y1="28" x2="35" y2="14" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="35" y1="14" x2="41" y2="28" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="35" y1="14" x2="35" y2="8" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="31.5" y1="8" x2="39" y2="8" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="17.5" y1="10" x2="25" y2="10" stroke="#FF6B35" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="24" cy="28" r="3" fill="#FF6B35"/>
+        </svg>
+        Vélo<span>Kid</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html"           class="nav-link" data-i18n="nav_home">Accueil</a></li>
+        <li><a href="boutique.html"        class="nav-link" data-i18n="nav_shop">Boutique</a></li>
+        <li><a href="qui-sommes-nous.html" class="nav-link" data-i18n="nav_about">Qui sommes-nous</a></li>
+        <li><a href="contact.html"         class="nav-link" data-i18n="nav_contact">Contact</a></li>
+      </ul>
+      <div style="display:flex;align-items:center;gap:8px">
+        <button class="lang-toggle" id="langToggle" onclick="toggleLanguage()">🇬🇧 EN</button>
+        <button class="cart-trigger" onclick="showCartDrawer()">🛒<span class="cart-badge">0</span></button>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+  <nav class="mobile-nav" id="mobileNav">
+    <a href="index.html"           class="nav-link" data-i18n="nav_home">🏠 Accueil</a>
+    <a href="boutique.html"        class="nav-link" data-i18n="nav_shop">🚲 Boutique</a>
+    <a href="qui-sommes-nous.html" class="nav-link" data-i18n="nav_about">👥 Qui sommes-nous</a>
+    <a href="contact.html"         class="nav-link" data-i18n="nav_contact">✉️ Contact</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="page-hero">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="index.html">Accueil</a> › <span>Politique de confidentialité</span>
+      </div>
+      <h1>Politique de confidentialité</h1>
+      <p>Dernière mise à jour : [DATE DE MISE EN LIGNE]</p>
+    </div>
+  </section>
+
+  <!-- CONTENU -->
+  <section class="section">
+    <div class="container">
+      <div class="cgv-content">
+
+        <!-- BANNIÈRE ADMIN - À SUPPRIMER AVANT MISE EN LIGNE -->
+        <div style="background:#FFF3CD;border:2px solid #FFC107;border-radius:8px;padding:16px 20px;margin-bottom:32px;font-size:.9rem">
+          <strong>⚠️ À compléter avant mise en ligne :</strong> remplacez tous les champs entre crochets <code>[...]</code> par vos vraies informations (nom de l'entreprise, DPO, date). Si vous intégrez Stripe pour le paiement, pensez à mentionner leur politique de confidentialité en lien. Supprimez ensuite cette bannière.
+        </div>
+
+        <div class="cgv-section">
+          <h2>1. Responsable du traitement</h2>
+          <p>Le responsable du traitement des données à caractère personnel collectées sur le site velokid.fr est :</p>
+          <ul>
+            <li><strong>Entreprise :</strong> [NOM DE VOTRE ENTREPRISE]</li>
+            <li><strong>Adresse :</strong> [ADRESSE COMPLÈTE]</li>
+            <li><strong>Email :</strong> bonjour@velokid.fr</li>
+            <li><strong>DPO (Délégué à la Protection des Données) :</strong> [VOTRE NOM] — dpo@velokid.fr</li>
+          </ul>
+        </div>
+
+        <div class="cgv-section">
+          <h2>2. Données collectées</h2>
+          <p>Dans le cadre de l'utilisation de notre site et de la passation de commandes, nous collectons les données suivantes :</p>
+
+          <h3 style="font-size:1rem;margin:16px 0 8px;color:var(--dark)">2.1 Lors d'une commande</h3>
+          <ul>
+            <li>Nom, prénom</li>
+            <li>Adresse email</li>
+            <li>Numéro de téléphone</li>
+            <li>Adresse de livraison et de facturation</li>
+            <li>Contenu du panier et montant de la commande</li>
+          </ul>
+          <p><em>Les données bancaires (numéro de carte, CVV) ne sont jamais stockées sur nos serveurs — elles sont traitées directement par notre prestataire de paiement sécurisé (Stripe).</em></p>
+
+          <h3 style="font-size:1rem;margin:16px 0 8px;color:var(--dark)">2.2 Lors d'un contact</h3>
+          <ul>
+            <li>Nom, prénom</li>
+            <li>Adresse email</li>
+            <li>Contenu du message</li>
+          </ul>
+
+          <h3 style="font-size:1rem;margin:16px 0 8px;color:var(--dark)">2.3 Données de navigation (cookies)</h3>
+          <ul>
+            <li>Préférences de langue (localStorage)</li>
+            <li>Contenu du panier (localStorage)</li>
+            <li>Aucun cookie de tracking tiers n'est actuellement utilisé</li>
+          </ul>
+        </div>
+
+        <div class="cgv-section">
+          <h2>3. Finalités du traitement</h2>
+          <p>Vos données sont collectées pour les finalités suivantes :</p>
+          <ul>
+            <li><strong>Traitement des commandes :</strong> gestion, facturation, livraison (base légale : exécution du contrat)</li>
+            <li><strong>Service client :</strong> répondre à vos demandes de contact et au SAV (base légale : intérêt légitime)</li>
+            <li><strong>Obligations légales :</strong> conservation des factures (base légale : obligation légale — 10 ans)</li>
+            <li><strong>Amélioration du service :</strong> analyse anonyme de la navigation (base légale : intérêt légitime)</li>
+          </ul>
+        </div>
+
+        <div class="cgv-section">
+          <h2>4. Durée de conservation</h2>
+          <ul>
+            <li><strong>Données de commande :</strong> 10 ans (obligation comptable)</li>
+            <li><strong>Messages de contact :</strong> 3 ans après le dernier échange</li>
+            <li><strong>Panier et préférences (localStorage) :</strong> stockés localement dans votre navigateur — effacés à la suppression du cache</li>
+          </ul>
+        </div>
+
+        <div class="cgv-section">
+          <h2>5. Destinataires des données</h2>
+          <p>Vos données peuvent être transmises aux tiers suivants, dans le strict cadre de l'exécution de nos services :</p>
+          <ul>
+            <li><strong>Stripe</strong> (traitement du paiement) — <a href="https://stripe.com/fr/privacy" target="_blank" rel="noopener" style="color:var(--primary)">politique de confidentialité Stripe</a></li>
+            <li><strong>Nos fournisseurs / transporteurs</strong> (nom + adresse de livraison uniquement, pour l'expédition)</li>
+            <li><strong>GitHub Pages</strong> (hébergement du site)</li>
+          </ul>
+          <p>Vos données ne sont jamais vendues à des tiers à des fins commerciales.</p>
+        </div>
+
+        <div class="cgv-section">
+          <h2>6. Vos droits (RGPD)</h2>
+          <p>Conformément au Règlement Général sur la Protection des Données (RGPD — UE 2016/679) et à la loi Informatique et Libertés, vous disposez des droits suivants :</p>
+          <ul>
+            <li><strong>Droit d'accès :</strong> obtenir une copie de vos données</li>
+            <li><strong>Droit de rectification :</strong> corriger des données inexactes</li>
+            <li><strong>Droit à l'effacement :</strong> demander la suppression de vos données (« droit à l'oubli »)</li>
+            <li><strong>Droit à la portabilité :</strong> recevoir vos données dans un format structuré</li>
+            <li><strong>Droit d'opposition :</strong> vous opposer à certains traitements</li>
+            <li><strong>Droit à la limitation :</strong> demander la suspension temporaire d'un traitement</li>
+          </ul>
+          <p>Pour exercer ces droits, contactez-nous à : <a href="mailto:dpo@velokid.fr" style="color:var(--primary)">dpo@velokid.fr</a></p>
+          <p>Vous avez également le droit d'introduire une réclamation auprès de la <strong>CNIL</strong> (Commission Nationale de l'Informatique et des Libertés) : <a href="https://www.cnil.fr" target="_blank" rel="noopener" style="color:var(--primary)">www.cnil.fr</a></p>
+        </div>
+
+        <div class="cgv-section">
+          <h2>7. Cookies et stockage local</h2>
+          <p>Le site velokid.fr utilise le <strong>localStorage</strong> de votre navigateur (et non des cookies tiers) pour stocker :</p>
+          <ul>
+            <li>Le contenu de votre panier d'achat</li>
+            <li>Votre préférence de langue (français / anglais)</li>
+          </ul>
+          <p>Ces données restent exclusivement sur votre appareil et ne sont pas transmises à nos serveurs. Vous pouvez les effacer à tout moment depuis les paramètres de votre navigateur (Paramètres › Confidentialité › Effacer les données de navigation).</p>
+          <p>Nous n'utilisons actuellement <strong>aucun cookie de tracking, de publicité ou d'analyse tiers</strong> (Google Analytics, Meta Pixel, etc.). Si nous venions à en intégrer, cette politique serait mise à jour et votre consentement explicite vous serait demandé.</p>
+        </div>
+
+        <div class="cgv-section">
+          <h2>8. Sécurité</h2>
+          <p>Nous mettons en œuvre les mesures techniques et organisationnelles appropriées pour protéger vos données contre tout accès non autorisé, altération, divulgation ou destruction. L'accès à notre back-office est protégé par authentification.</p>
+          <p>Les transactions de paiement sont intégralement chiffrées via le protocole TLS (HTTPS) et traitées par Stripe, certifié PCI-DSS niveau 1.</p>
+        </div>
+
+        <div class="cgv-section">
+          <h2>9. Modifications</h2>
+          <p>Nous nous réservons le droit de modifier la présente politique de confidentialité à tout moment. Toute modification sera signalée par la mise à jour de la date en haut de cette page. Nous vous encourageons à la consulter régulièrement.</p>
+        </div>
+
+        <div class="cgv-section">
+          <h2>10. Contact</h2>
+          <p>Pour toute question relative à cette politique ou à vos données personnelles :</p>
+          <ul>
+            <li>Email : <a href="mailto:dpo@velokid.fr" style="color:var(--primary)">dpo@velokid.fr</a></li>
+            <li>Courrier : [NOM DE VOTRE ENTREPRISE] — [ADRESSE]</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="logo"><svg class="logo-svg" viewBox="0 0 52 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="11" cy="28" r="8.5" stroke="#FF6B35" stroke-width="2.5"/>
+          <circle cx="11" cy="28" r="2.5" fill="#FF6B35"/>
+          <circle cx="41" cy="28" r="8.5" stroke="#FF6B35" stroke-width="2.5"/>
+          <circle cx="41" cy="28" r="2.5" fill="#FF6B35"/>
+          <line x1="11" y1="28" x2="24" y2="28" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="24" y1="28" x2="21" y2="11" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="21" y1="11" x2="35" y2="14" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="24" y1="28" x2="35" y2="14" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="35" y1="14" x2="41" y2="28" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="35" y1="14" x2="35" y2="8" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="31.5" y1="8" x2="39" y2="8" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="17.5" y1="10" x2="25" y2="10" stroke="#FF6B35" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="24" cy="28" r="3" fill="#FF6B35"/>
+        </svg>Vélo<span>Kid</span></a>
+          <p data-i18n="footer_desc">Spécialiste du vélo enfant depuis 2015.</p>
+          <div class="footer-socials">
+            <button class="social-btn">f</button>
+            <button class="social-btn">📷</button>
+            <button class="social-btn">♪</button>
+            <button class="social-btn">▶</button>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4 data-i18n="footer_shop">Boutique</h4>
+          <ul class="footer-links">
+            <li><a href="boutique.html" data-i18n="footer_all">Tous les vélos</a></li>
+            <li><a href="boutique.html" data-i18n="footer_drais">Draisiennes</a></li>
+            <li><a href="boutique.html" data-i18n="footer_bmx">BMX & Freestyle</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4 data-i18n="footer_info">Informations</h4>
+          <ul class="footer-links">
+            <li><a href="qui-sommes-nous.html" data-i18n="footer_about">Qui sommes-nous</a></li>
+            <li><a href="contact.html" data-i18n="nav_contact">Contact</a></li>
+            <li><a href="suivi-commande.html" data-i18n="footer_track">Suivi commande</a></li>
+            <li><a href="cgv.html" data-i18n="footer_cgv">CGV</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4 data-i18n="footer_contact">Contact</h4>
+          <ul class="footer-links">
+            <li>📍 [VOTRE ADRESSE]</li>
+            <li>📞 [VOTRE TÉLÉPHONE]</li>
+            <li>✉️ bonjour@velokid.fr</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p data-i18n="footer_copy">© 2025 VéloKid. Tous droits réservés.</p>
+        <div class="footer-bottom-links">
+          <a href="cgv.html" data-i18n="footer_cgv">CGV</a>
+          <a href="mentions-legales.html" data-i18n="footer_legal">Mentions légales</a>
+          <a href="politique-confidentialite.html" data-i18n="footer_cookies">Confidentialité</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <aside class="cart-drawer" id="cartDrawer">
+    <div class="cart-drawer-header">
+      <h3 data-i18n="cart_drawer_title">Panier</h3>
+      <button class="cart-drawer-close" onclick="closeCartDrawer()">✕</button>
+    </div>
+    <div class="cart-drawer-body"></div>
+    <div class="cart-drawer-footer"></div>
+  </aside>
+  <div class="cart-toast" id="cartToast">
+    <span class="cart-toast-icon">✅</span>
+    <span id="cartToastMsg">Produit ajouté au panier !</span>
+  </div>
+  <script src="translations.js"></script>
+  <script src="cart.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
